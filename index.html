@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
+    <title>Documentation</title>
 
     <link href="stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
@@ -13,7 +13,7 @@
 
       <script>
         $(function() {
-          setupLanguages(["shell","ruby","python"]);
+          setupLanguages(["php","twig","css","js"]);
         });
       </script>
   </head>
@@ -28,9 +28,10 @@
     <div class="tocify-wrapper">
       <img src="images/logo.png" />
         <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
+              <a href="#" data-language-name="php">php</a>
+              <a href="#" data-language-name="twig">twig</a>
+              <a href="#" data-language-name="css">css</a>
+              <a href="#" data-language-name="js">js</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -39,7 +40,7 @@
       <div id="toc">
       </div>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
+            <li><a href='https://press.codes/checkout?edd_action=add_to_cart&download_id=657809'>Get the theme</a></li>
             <li><a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
         </ul>
     </div>
@@ -47,209 +48,575 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+<p><strong>Maera</strong> is a developer-friendly theme that allows you to quickly prototype sites and extend it with your own custom plugins.</p>
 
-<p>We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+<p><strong>It&rsquo;s a kick-ass open-minded theming framework.</strong></p>
 
-<p>This example API documentation page was created with <a href="http://github.com/tripit/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&rsquo;s documentation.</p>
-<h1 id='authentication'>Authentication</h1>
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<pre><code class="highlight ruby"><span class="nb">require</span> <span class="s1">'kittn'</span>
+<p>It is completely open-source, licensed under the MIT license
+In its heart it uses the <a href="http://twig.sensiolabs.org/">twig templating engine</a> and the WordPress Customizer.</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
+<p>With Maera we&rsquo;re introducing the concept of theme <strong>shells</strong>.  An easy way to completely customize the theme with your own markup, css, scripts and functionality to meet your own needs!</p>
+
+          <h1 id='actions'>Actions</h1><h2 id='generic-actions'>Generic actions</h2>
+<p><code class="prettyprint">maera/admin/save</code></p>
+
+<p>This action is run when the admin page is saved.
+An example usage is when we import the customizer options in a shell that uses a compiler. In that case, when we perform the import we may want to trigger the shell&rsquo;s compiler so that the stylesheets get re-generated, caches dumped etc.</p>
+
+<p><code class="prettyprint">maera/shell/include_modules</code></p>
+
+<p>This action is run when the shell is being initialized.</p>
+<h2 id='content-injecting-actions'>Content-injecting actions</h2>
+<ul>
+<li><code class="prettyprint">maera/wrap/before</code></li>
+<li><code class="prettyprint">maera/wrap/after</code></li>
+<li><code class="prettyprint">maera/content/before</code></li>
+<li><code class="prettyprint">maera/content/after</code></li>
+<li><code class="prettyprint">maera/main/before</code></li>
+<li><code class="prettyprint">maera/main/after</code></li>
+<li><code class="prettyprint">maera/page/pre_content</code></li>
+<li><code class="prettyprint">maera/page/after_content</code></li>
+<li><code class="prettyprint">maera/entry/footer</code></li>
+<li><code class="prettyprint">maera/teaser/start</code></li>
+<li><code class="prettyprint">maera/single/top</code></li>
+<li><code class="prettyprint">maera/single/pre_content</code></li>
+<li><code class="prettyprint">maera/single/after_content</code></li>
+<li><code class="prettyprint">maera/in_article/top</code></li>
+<li><code class="prettyprint">maera/footer/before</code></li>
+<li><code class="prettyprint">maera/footer/start</code></li>
+<li><code class="prettyprint">maera/footer/content</code></li>
+<li><code class="prettyprint">maera/footer/end</code></li>
+<li><code class="prettyprint">maera/footer/after</code></li>
+<li><code class="prettyprint">maera/header/before</code></li>
+<li><code class="prettyprint">maera/header/after</code></li>
+<li><code class="prettyprint">maera/index/begin</code></li>
+<li><code class="prettyprint">maera/index/end</code></li>
+<li><code class="prettyprint">maera/in_loop/begin</code></li>
+<li><code class="prettyprint">maera/in_loop/end</code></li>
+</ul>
+
+          <h1 id='filters'>Filters</h1><h2 id='maeraadminoptions'>maera/admin/options</h2>
+<p>This filter will add items to the Admin Theme Options page.</p>
+
+<p>You may want to use this filter to add aditional options. However, theme specific customization options should use the customizer and not the options page.</p>
+<h2 id='maeracontainer_class'>maera/container_class</h2>
+<p>This filter will change or add the class to the main container.
+You may want to use this filter to change the width of the container or to append a certain CSS class.</p>
+
+<p>Example:</p>
+<pre><code class="highlight php"><span class="cp">&lt;?php</span>
+<span class="k">function</span> <span class="nf">my_container_class</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="nv">$class_setting</span> <span class="o">=</span> <span class="nx">get_theme_mod</span><span class="p">(</span> <span class="s1">'my_theme_mod'</span><span class="p">,</span><span class="mi">1</span> <span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span> <span class="nv">$class_setting</span>  <span class="o">==</span> <span class="mi">1</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Bootstrap responsive fixed container class.
+</span>        <span class="nv">$main_class</span> <span class="o">=</span> <span class="s1">'container'</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">// Bootstrap fluid full-width container class.
+</span>        <span class="nv">$main_class</span> <span class="o">=</span> <span class="s1">'container-fluid'</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nv">$main_class</span><span class="p">;</span>
+
+<span class="p">}</span>
+<span class="nx">add_filter</span><span class="p">(</span> <span class="s1">'maera/container_class'</span><span class="p">,</span> <span class="s1">'maera_container_class'</span> <span class="p">);</span>
+<span class="cp">?&gt;</span>
 </code></pre>
-<pre><code class="highlight python"><span class="kn">import</span> <span class="nn">kittn</span>
+<h2 id='maeracontent_width'>maera/content_width</h2>
+<p>You may want to use this filter to change the default width of the container.</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
+<p>Example:</p>
+<pre><code class="highlight php"><span class="cp">&lt;?php</span>
+<span class="k">function</span> <span class="nf">my_content_width</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="k">if</span> <span class="p">(</span> <span class="o">!</span> <span class="nb">isset</span><span class="p">(</span> <span class="nv">$content_width</span> <span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$content_width</span> <span class="o">=</span> <span class="mi">960</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nv">$content_width</span><span class="p">;</span>
+
+<span class="p">}</span>
+<span class="nx">add_filter</span><span class="p">(</span> <span class="s1">'maera/content_width'</span><span class="p">,</span> <span class="s1">'maera_'</span> <span class="p">);</span>
+<span class="cp">?&gt;</span>
 </code></pre>
-<pre><code class="highlight shell"><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+<h2 id='maeraimageheight'>maera/image/height</h2>
+<p>You may want to use this filter to change the height of featured images. This may be useful when creating fluid, concise layouts.</p>
+
+<p>Example: Set the height of featured images to 200px</p>
+<pre><code class="highlight php"><span class="cp">&lt;?php</span>
+<span class="k">function</span> <span class="nf">my_featured_images_height</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="mi">200</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">add_action</span><span class="p">(</span> <span class="s1">'maera/image/height'</span><span class="p">,</span> <span class="s1">'my_featured_images_height'</span> <span class="p">);</span>
+<span class="cp">?&gt;</span>
 </code></pre>
+<h2 id='maeraimagewidth'>maera/image/width</h2>
+<p>You may want to use this filter to change the width of featured images. This may be useful when creating fluid, concise layouts.</p>
 
-<blockquote>
-<p>Make sure to replace <code class="prettyprint">meowmeowmeow</code> with your API key.</p>
-</blockquote>
-
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
-
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code class="prettyprint">Authorization: meowmeowmeow</code></p>
-
-<p><aside class="notice">
-You must replace <code class="prettyprint">meowmeowmeow</code> with your personal API key.
-</aside></p>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><pre><code class="highlight ruby"><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
+<p>Example: Set the width of featured images to 450px</p>
+<pre><code class="highlight php"><span class="cp">&lt;?php</span>
+<span class="k">function</span> <span class="nf">my_featured_images_width</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="mi">450</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">add_action</span><span class="p">(</span> <span class="s1">'maera/image/height'</span><span class="p">,</span> <span class="s1">'my_featured_images_width'</span> <span class="p">);</span>
+<span class="cp">?&gt;</span>
 </code></pre>
-<pre><code class="highlight python"><span class="kn">import</span> <span class="nn">kittn</span>
+<h2 id='maerasection_classprimary'>maera/section_class/primary</h2>
+<p>Allows you to add classes to the primary sidebar.</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<p>Example:</p>
+<pre><code class="highlight php"><span class="cp">&lt;?php</span>
+<span class="k">function</span> <span class="nf">my_sidebar_primary_classes</span><span class="p">(</span> <span class="nv">$class</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$class</span> <span class="o">.</span> <span class="s1">' primary col-sm-6 col-md-4 col-lg-3'</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">add_action</span><span class="p">(</span> <span class="s1">'maera/section_class/primary'</span><span class="p">,</span> <span class="s1">'my_sidebar_primary_classes'</span> <span class="p">);</span>
+<span class="cp">?&gt;</span>
 </code></pre>
-<pre><code class="highlight shell">curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
+<h2 id='maerasection_classsecondary'>maera/section_class/secondary</h2>
+<p>Allows you to add classes to the secondary sidebar. Usage is exactly the same as the <a href="#maerasection_classprimary">maera/section_class/primary</a> action.</p>
+<h2 id='maerasection_classwrapper'>maera/section_class/wrapper</h2>
+<p>Allows you to add classes to a wrapper div that includes the content area and the primary sidebar. Particularty useful if you&rsquo;re trying to achieve a template that has 3 columns and you need to float the content and sidebar to the right. Usage is exactly the same as the <a href="#maerasection_classprimary">maera/section_class/primary</a> action.</p>
+<h2 id='maerashellsavailable'>maera/shells/available</h2>
+<p>You can use this filter to add your own shell in the list of available shells so that users can select and activate it.</p>
 
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre><code class="highlight json"><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Isis"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
+<p>Usage:</p>
+<pre><code class="highlight php"><span class="cp">&lt;?php</span>
 
-<p>This endpoint retrieves all kittens.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET http://example.com/kittens</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
-</tr>
-<tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
-</tr>
-</tbody></table>
+<span class="sd">/**
+ * Include the shell
+ */</span>
+<span class="k">function</span> <span class="nf">maera_shell_core_include</span><span class="p">(</span> <span class="nv">$shells</span> <span class="p">)</span> <span class="p">{</span>
 
-<p><aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside></p>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><pre><code class="highlight ruby"><span class="nb">require</span> <span class="s1">'kittn'</span>
+    <span class="c1">// Add our shell to the array of available shells
+</span>    <span class="nv">$shells</span><span class="p">[]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'value'</span> <span class="o">=&gt;</span> <span class="s1">'core'</span><span class="p">,</span>
+        <span class="s1">'label'</span> <span class="o">=&gt;</span> <span class="s1">'Core'</span><span class="p">,</span>
+        <span class="s1">'class'</span> <span class="o">=&gt;</span> <span class="s1">'Maera_Shell_Core'</span><span class="p">,</span>
+    <span class="p">);</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre><code class="highlight python"><span class="kn">import</span> <span class="nn">kittn</span>
+    <span class="k">return</span> <span class="nv">$shells</span><span class="p">;</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre><code class="highlight shell">curl <span class="s2">"http://example.com/api/kittens/3"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+<span class="p">}</span>
+<span class="nx">add_filter</span><span class="p">(</span> <span class="s1">'maera/shells/available'</span><span class="p">,</span> <span class="s1">'maera_shell_core_include'</span> <span class="p">);</span>
+
+<span class="cp">?&gt;</span>
 </code></pre>
 
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre><code class="highlight json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Isis"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<p>More info can be found on the [[Defining a shell]] page.</p>
+<h2 id='maerastyles'>maera/styles</h2>
+<p>If you need to add some custom CSS to your page, you can use this filter.</p>
 
-<p>This endpoint retrieves a specific kitten.</p>
+<p>Usage:</p>
+<pre><code class="highlight php"><span class="cp">&lt;?php</span>
+<span class="k">function</span> <span class="nf">custom_header_css</span><span class="p">(</span> <span class="nv">$styles</span> <span class="p">)</span> <span class="p">{</span>
 
-<p><aside class="warning">If you&rsquo;re not using an administrator API key, note that some kittens will return 403 Forbidden if they are hidden for admins only.</aside></p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code class="prettyprint">GET http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the cat to retrieve</td>
-</tr>
-</tbody></table>
+    <span class="nv">$image_url</span> <span class="o">=</span> <span class="nx">get_header_image</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="nx">is_singular</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="nx">has_post_thumbnail</span><span class="p">()</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$image_array</span> <span class="o">=</span> <span class="nx">wp_get_attachment_image_src</span><span class="p">(</span> <span class="nx">get_post_thumbnail_id</span><span class="p">(),</span> <span class="s1">'full'</span> <span class="p">);</span>
+        <span class="nv">$image_url</span> <span class="o">=</span> <span class="nv">$image_array</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="p">}</span>
 
-          <h1 id='errors'>Errors</h1>
-<p><aside class="notice">This error section is stored in a separate file in <code class="prettyprint">includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files&hellip;just save them to the <code class="prettyprint">includes</code> folder and add them to the top of your <code class="prettyprint">index.md</code>&rsquo;s frontmatter. Files are included in the order listed.</aside></p>
+    <span class="k">if</span> <span class="p">(</span> <span class="k">empty</span><span class="p">(</span> <span class="nv">$image_url</span> <span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$styles</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$styles</span> <span class="o">.</span> <span class="s1">'.page-header:before{ background: url("'</span> <span class="o">.</span> <span class="nv">$url</span> <span class="o">.</span> <span class="s1">'") no-repeat center center; }'</span><span class="p">;</span>
+    <span class="p">}</span>
 
-<p>The Kittn API uses the following error codes:</p>
+<span class="p">}</span>
+<span class="nx">add_action</span><span class="p">(</span> <span class="s1">'maera/styles'</span><span class="p">,</span> <span class="s1">'custom_header_css'</span> <span class="p">);</span>
 
-<table><thead>
+<span class="cp">?&gt;</span>
+</code></pre>
+<h2 id='maerastylesheeturl'>maera/stylesheet/url</h2>
+<p>Changes the URL of the stylesheet to be loaded. You can use that if you&rsquo;re building your own shell to replace the default, empty stylesheet with your own.</p>
+
+<p>Usage:</p>
+<pre><code class="highlight php"><span class="cp">&lt;?php</span>
+
+<span class="k">function</span> <span class="nf">my_stylesheet_url</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">get_stylesheet_directory_uri</span><span class="p">()</span> <span class="o">.</span> <span class="s1">'/assets/style.css'</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">add_filter</span><span class="p">(</span> <span class="s1">'maera/stylesheet/url'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span> <span class="nv">$this</span><span class="p">,</span> <span class="s1">'my_stylesheet_url'</span> <span class="p">)</span> <span class="p">);</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+<h2 id='maerastylesheetver'>maera/stylesheet/ver</h2>
+<p>Changes the version of the stylesheet for cache custing.</p>
+
+<p>Usage:</p>
+<pre><code class="highlight php"><span class="cp">&lt;?php</span>
+
+<span class="sd">/**
+ * Get the file modification time of our stylesheet
+ * and use it as the file version.
+ */</span>
+<span class="k">function</span> <span class="nf">my_stylesheet_version</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">filemtime</span><span class="p">(</span> <span class="nx">get_stylesheet_directory</span><span class="p">()</span> <span class="o">.</span> <span class="s1">'/assets/style.css'</span> <span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">add_filter</span><span class="p">(</span> <span class="s1">'maera/stylesheet/ver'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span> <span class="nv">$this</span><span class="p">,</span> <span class="s1">'my_stylesheet_version'</span> <span class="p">)</span> <span class="p">);</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+<h2 id='other-filters-to-be-documented'>Other filters (to be documented):</h2>
+<ul>
+<li>maera/sidebar/footer</li>
+<li>maera/sidebar/primary</li>
+<li>maera/sidebar/secondary</li>
+<li>maera/timber/locations</li>
+<li>maera/title</li>
+<li>maera/teaser/mode</li>
+<li>maera/widgets/class</li>
+<li>maera/widgets/title/after</li>
+<li>maera/widgets/title/before</li>
+<li>maera/plugins/required</li>
+<li>maera/twig/placeholders</li>
+<li>maera/templates</li>
+<li>maera/template/plugin_compatibility</li>
+<li>maera/timber/context</li>
+<li>maera/timber/locations/roots</li>
+<li>maera/timber/locations</li>
+<li>maera/sidebar_template</li>
+<li>maera/admin/tabs</li>
+<li>maera/section_class/content</li>
+</ul>
+
+          <h1 id='shells'>Shells</h1><h2 id='what-shells-are'>What Shells are</h2>
+<p>Shells can be built as plugins and allow you to completely custom-code your own theme, overriding the default templates of the theme as well as its stylesheets and other scripts.</p>
+
+<p>The default templates of the theme already include a lot of hooks and actions you can use, allowing for a sane markup, SEO-optimization and easy to modify using a <a href="/docs/shells/macros/">shell macros</a> file.</p>
+<h2 id='building-a-shell'>Building a Shell</h2>
+<p>Maera makes it easy to create new shells.</p>
+
+<p>The recommended method to create a new shell is by writing a custom WordPress plugin.</p>
+
+<p>The first step will be to create our main plugin file. In this case we will call this file <code class="prettyprint">shell.php</code> and add the following code in it:</p>
+<pre><code class="highlight php"><span class="cp">&lt;?php</span>
+<span class="cm">/*
+Plugin Name:         Example Shell
+Description:         This is just an example of how to build a shell plugin for the Maera theme
+Version:             0.1
+Author:              me
+Author URI:          http://example.com
+*/</span>
+
+<span class="nb">define</span><span class="p">(</span> <span class="s1">'MAERA_EXAMPLE_SHELL_URL'</span><span class="p">,</span> <span class="nx">plugins_url</span><span class="p">(</span> <span class="s1">''</span><span class="p">,</span> <span class="k">__FILE__</span> <span class="p">)</span> <span class="p">);</span>
+<span class="nb">define</span><span class="p">(</span> <span class="s1">'MAERA_EXAMPLE_SHELL_PATH'</span><span class="p">,</span> <span class="nb">dirname</span><span class="p">(</span> <span class="k">__FILE__</span> <span class="p">)</span> <span class="p">);</span>
+
+<span class="sd">/**
+ * Include the shell
+ */</span>
+<span class="k">function</span> <span class="nf">maera_shell_example_include</span><span class="p">(</span> <span class="nv">$shells</span> <span class="p">)</span> <span class="p">{</span>
+
+    <span class="c1">// Add our shell to the array of available shells
+</span>    <span class="nv">$shells</span><span class="p">[]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+
+        <span class="c1">// Alphanumeric (lowercase name of our shell)
+</span>        <span class="s1">'value'</span> <span class="o">=&gt;</span> <span class="s1">'example'</span><span class="p">,</span>
+
+        <span class="c1">// The full name of our shell.
+</span>        <span class="c1">// This will be used in the shell selection option in the dashboard
+</span>        <span class="s1">'label'</span> <span class="o">=&gt;</span> <span class="s1">'Example'</span><span class="p">,</span>
+
+        <span class="c1">// The name of our Shell Class.
+</span>        <span class="c1">// We're going to include everything concerning our shell there.
+</span>        <span class="s1">'class'</span> <span class="o">=&gt;</span> <span class="s1">'Maera_Example_Shell'</span><span class="p">,</span>
+
+    <span class="p">);</span>
+
+    <span class="k">return</span> <span class="nv">$shells</span><span class="p">;</span>
+
+<span class="p">}</span>
+<span class="c1">// Add our shell to the list of available shells
+</span><span class="nx">add_filter</span><span class="p">(</span> <span class="s1">'maera/shells/available'</span><span class="p">,</span> <span class="s1">'maera_shell_bootstrap_include'</span> <span class="p">);</span>
+
+<span class="sd">/**
+ * Next we will build our main shell class which will contain all the functionality of our shell.
+ * We will be loading our stylesheets, scripts and anything else required by our shell here.
+ */</span>
+
+<span class="sd">/**
+ * The Shell
+ */</span>
+<span class="k">class</span> <span class="nc">Maera_Example_Shell</span> <span class="p">{</span>
+
+    <span class="k">private</span> <span class="k">static</span> <span class="nv">$instance</span><span class="p">;</span>
+
+    <span class="sd">/**
+     * Add any actions &amp; filters we may be using.
+     * This is where you'll probably be executing any custom functions that you add to this class.
+     * These are executed as soon as the class is instantiated.
+     */</span>
+    <span class="k">private</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">()</span> <span class="p">{</span>
+
+        <span class="nx">do_action</span><span class="p">(</span> <span class="s1">'maera/shell/include_modules'</span> <span class="p">);</span>
+
+        <span class="c1">// CAUTION: DO NOT DELETE THIS.
+</span>        <span class="k">if</span> <span class="p">(</span> <span class="o">!</span> <span class="nb">defined</span><span class="p">(</span> <span class="s1">'MAERA_SHELL_PATH'</span> <span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="nb">define</span><span class="p">(</span> <span class="s1">'MAERA_SHELL_PATH'</span><span class="p">,</span> <span class="nb">dirname</span><span class="p">(</span> <span class="k">__FILE__</span> <span class="p">)</span> <span class="p">);</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+
+    <span class="sd">/**
+     * This is required to instantiate our shell.
+     * CAUTION, DO NOT DELETE THIS FUNCTION.
+     */</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">get_instance</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="kc">null</span> <span class="o">==</span> <span class="nx">self</span><span class="o">::</span><span class="nv">$instance</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="nx">self</span><span class="o">::</span><span class="nv">$instance</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">self</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nx">self</span><span class="o">::</span><span class="nv">$instance</span><span class="p">;</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+
+<p>You can extend that class and create your own methods and functions but the above code is the bare minimum to create and use a new shell.
+From that point on it&rsquo;s all up to your inspiration!</p>
+<h2 id='shell-macros'>Shell Macros</h2>
+<p>There are many CSS frameworks out there like for example Bootstrap, Foundation, Pure and lots more. Each one of them defines a grid, buttons, alert messages and a lot of other things using its unique HTML structure, CSS class names etc.</p>
+
+<p>We wanted to have a mechanism that will allow our plugins to be framework-agnostic, so if you write something in a plugin it can work no matter what shell/css-framework you use on your site.</p>
+
+<p>To that end we are using <a href="http://twig.sensiolabs.org/doc/tags/macro.html">twig macros</a>.<br>
+Macros are a way to standardize some common functionalities that most frameworks have (such as for example a grid or buttons) while at the same time allowing us to easily change these when creating a new shell.<br>
+You can see a list of the default macros in <a href="https://github.com/presscodes/maera/tree/master/views/macros">the github repository</a>.<br>
+For example the macro to create a new row in the core shell looks like this:</p>
+<pre><code class="highlight plaintext">{% macro row_open(element, id, extra_classes, properties) %}
+    &lt;{{ element|default('div') }} class="g{{ extra_classes ? ' '~extra_classes : '' }}"{{ id ? ' id="'~id~'"' : '' }}{{ properties ? ' '~properties : '' }}&gt;
+{% endmacro %}
+</code></pre>
+
+<p>If you want to use this macro in a twig custom twig file in your templates you will first have to import it by adding this line at the top of your twig file:</p>
+<pre><code class="highlight plaintext">{% from 'row_open.html.twig' import row_open as row_open %}
+</code></pre>
+
+<p>and then you can use it to open a row like this:</p>
+<pre><code class="highlight plaintext">{{ row_open( 'div', 'content', 'bg' ) }}
+</code></pre>
+
+<p>The above will have this as a result:</p>
+<pre><code class="highlight html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"g bg"</span> <span class="na">id=</span><span class="s">"content"</span><span class="nt">&gt;</span>
+</code></pre>
+
+<p>In addition, we also have shortcode-like syntax that can be entered wherever you want. The available functions that you can use this way are:</p>
+
+<p><code class="prettyprint">[maera_grid_container_open]</code> - opens a container div<br>
+<code class="prettyprint">[maera_grid_container_close]</code> - closes a container div<br>
+<code class="prettyprint">[maera_grid_container_class]</code> - the class of the container</p>
+
+<p><code class="prettyprint">[maera_grid_row_open]</code> - open a row div<br>
+<code class="prettyprint">[maera_grid_row_close]</code> - closes a row div<br>
+<code class="prettyprint">[maera_grid_row_class]</code> - the class of the row</p>
+
+<p><code class="prettyprint">[maera_grid_col_1]</code> - the column classes for width 1/12<br>
+<code class="prettyprint">[maera_grid_col_2]</code> - the column classes for width 2/12<br>
+<code class="prettyprint">[maera_grid_col_3]</code> - the column classes for width 3/12<br>
+<code class="prettyprint">[maera_grid_col_4]</code> - the column classes for width 4/12<br>
+<code class="prettyprint">[maera_grid_col_5]</code> - the column classes for width 5/12<br>
+<code class="prettyprint">[maera_grid_col_6]</code> - the column classes for width 6/12<br>
+<code class="prettyprint">[maera_grid_col_7]</code> - the column classes for width 7/12<br>
+<code class="prettyprint">[maera_grid_col_8]</code> - the column classes for width 8/12<br>
+<code class="prettyprint">[maera_grid_col_9]</code> - the column classes for width 9/12<br>
+<code class="prettyprint">[maera_grid_col_10]</code> - the column classes for width 10/12<br>
+<code class="prettyprint">[maera_grid_col_11]</code> - the column classes for width 11/12<br>
+<code class="prettyprint">[maera_grid_col_12]</code> - the column classes for width 12/12  </p>
+
+<p><code class="prettyprint">[maera_button_default_extra_small]</code> - classes for default, extra-small buttons<br>
+<code class="prettyprint">[maera_button_default_small]</code> - classes for default, small buttons<br>
+<code class="prettyprint">[maera_button_default_medium]</code> - classes for default, medium buttons<br>
+<code class="prettyprint">[maera_button_default_large]</code> - classes for default, large buttons<br>
+<code class="prettyprint">[maera_button_default_extra_large]</code> - classes for default, extra-large buttons  </p>
+
+<p><code class="prettyprint">[maera_button_primary_extra_small]</code> - classes for primary, extra-small buttons<br>
+<code class="prettyprint">[maera_button_primary_small]</code> - classes for primary, small buttons<br>
+<code class="prettyprint">[maera_button_primary_medium]</code> - classes for primary, medium buttons<br>
+<code class="prettyprint">[maera_button_primary_large]</code> - classes for primary, large buttons<br>
+<code class="prettyprint">[maera_button_primary_extra_large]</code> - classes for primary, extra-large buttons  </p>
+
+<p><code class="prettyprint">[maera_button_success_extra_small]</code> - classes for success, extra-small buttons<br>
+<code class="prettyprint">[maera_button_success_small]</code> - classes for success, small buttons<br>
+<code class="prettyprint">[maera_button_success_medium]</code> - classes for success, medium buttons<br>
+<code class="prettyprint">[maera_button_success_large]</code> - classes for success, large buttons<br>
+<code class="prettyprint">[maera_button_success_extra_large]</code> - classes for success, extra-large buttons  </p>
+
+<p><code class="prettyprint">[maera_button_info_extra_small]</code> - classes for info, extra-small buttons<br>
+<code class="prettyprint">[maera_button_info_small]</code> - classes for info, small buttons<br>
+<code class="prettyprint">[maera_button_info_medium]</code> - classes for info, medium buttons<br>
+<code class="prettyprint">[maera_button_info_large]</code> - classes for info, large buttons<br>
+<code class="prettyprint">[maera_button_info_extra_large]</code> - classes for info, extra-large buttons  </p>
+
+<p><code class="prettyprint">[maera_button_warning_extra_small]</code> - classes for warning, extra small buttons<br>
+<code class="prettyprint">[maera_button_warning_small]</code> - classes for warning, small buttons<br>
+<code class="prettyprint">[maera_button_warning_medium]</code> - classes for warning, medium buttons<br>
+<code class="prettyprint">[maera_button_warning_large]</code> - classes for warning, large buttons<br>
+<code class="prettyprint">[maera_button_warning_extra_large]</code> - classes for warning, extra-large buttons  </p>
+
+<p><code class="prettyprint">[maera_button_danger_extra_small]</code> - classes for danger, extra-small buttons<br>
+<code class="prettyprint">[maera_button_danger_small]</code> - classes for danger, small buttons<br>
+<code class="prettyprint">[maera_button_danger_medium]</code> - classes for danger, medium buttons<br>
+<code class="prettyprint">[maera_button_danger_large]</code> - classes for danger, large buttons<br>
+<code class="prettyprint">[maera_button_danger_extra_large]</code> - classes for danger, extra-large buttons  </p>
+
+<p><code class="prettyprint">[maera_button_link_extra_small]</code> - classes for link, extra-small buttons<br>
+<code class="prettyprint">[maera_button_link_small]</code> - classes for link, small buttons<br>
+<code class="prettyprint">[maera_button_link_medium]</code> - classes for link, medium buttons<br>
+<code class="prettyprint">[maera_button_link_large]</code> - classes for link, large buttons<br>
+<code class="prettyprint">[maera_button_link_extra_large]</code> - classes for link, extra-large buttons  </p>
+
+<p>Example scenario: A row that has a 3-column layout inside. The 1st column is half the width of the page, the 2nd column is a 3rd of the page width and the 3rd column is 1 6th of the page width. The 1st and 2nd columns also have a button in them:  </p>
+<pre><code class="highlight html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"[maera_grid_row_class]"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"[maera_grid_col_6]"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;p&gt;</span>This column has a width of 6/12 (half the page/content)<span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"[maera_button_success_small]"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>small green button<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"[maera_grid_col_4]"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;p&gt;</span>This column is 4/12 of the page/content (1 3rd of the width of its parent element)<span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"[maera_button_danger_large]"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>large red button<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"[maera_grid_col_2]"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;p&gt;</span>This column is 2/12 of the page/content width. That's too narrow and rarely used<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre>
+
+<p>Though the above example is pretty simplistic, it gives you an idea of how simple it is to implement these in your own templates. The great thing about them is that you can also use them <strong>in your content</strong>, so you can simply use them when using the WordPress content editor. This will allow you to have your content play nicely no matter which shell you&rsquo;re using. So you can be using <a href="http://getbootstrap.com/">Bootstrap</a> now and <a href="http://foundation.zurb.com/">foundation</a> next month, or even <a href="http://purecss.io/">purecss</a> and your content and customisations will look nice wherever you are.</p>
+
+          <h1 id='templating'>Templating</h1>
+<p>Maera is a WordPress theme and as such it follows the default WordPress <a href="http://wphierarchy.com/">template hierarchy</a>. However, we do have some extra stuff going on under the hood that we have found make life a lot easier both for skilled developers and for novice users that may not be php developers.</p>
+
+<p>In addition to the default template files that you can use if you want, we also provide a &ldquo;views&rdquo; folder that contains &ldquo;twig&rdquo; files. You can learn more about the twig language by clicking on <a href="http://twig.sensiolabs.org/">this link</a>.
+<code class="prettyprint">twig</code> files have a structure and syntax a lot easier and more user-friendly than php. For example if you wanted to echo something in PHP, you would do this:</p>
+<pre><code class="highlight php"><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$foo</span><span class="p">;</span> <span class="cp">?&gt;</span>
+</code></pre>
+
+<p>In twig however it&rsquo;s a lot simpler than that:</p>
+<pre><code class="highlight plaintext">{{ foo }}
+</code></pre>
+
+<p>You can learn more about the syntax and naming conventions by reading the <a href="https://github.com/jarednova/timber/wiki">Timber Docs</a>.</p>
+
+<p>To add your own templates you can create a <a href="href=&quot;http://codex.wordpress.org/Child_Themes">Child Theme</a> and either create custom php template files like you would do on every other WordPress theme, or custom twig templates.
+The template hierarchy of the twig files is the same as the <a href="href=&quot;http://wphierarchy.com/">default WordPress templates structure</a>, simply by replacing the <code class="prettyprint">.php</code> suffix with <code class="prettyprint">.twig</code>.
+You can keep your <code class="prettyprint">.twig</code> files in the root of your child theme, or a <code class="prettyprint">/views</code> folder if you want to keep things a little more organized.</p>
+
+<hr>
+<h2 id='template-hierarchy-on-the-maera-theme'>Template hierarchy on the Maera theme:</h2>
+<table>
+<th>
+<td>Content Template</td>
+<td>Sidebar Template</td>
+</th>
 <tr>
-<th>Error Code</th>
-<th>Meaning</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>400</td>
-<td>Bad Request &ndash; Your request sucks</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorized &ndash; Your API key is wrong</td>
+<th>Author Archives</th>
+<td>
+author-{nicename}.twig, author-{ID}.twig, author.twig, archive.twig, index.twig
+</td>
+<td>
+sidebar.twig
+</td>
 </tr>
 <tr>
-<td>403</td>
-<td>Forbidden &ndash; The kitten requested is hidden for administrators only</td>
+<th>Category Archives</th>
+<td>
+category-{slug}.twig, category-{ID}.twig, category.twig, archive.twig, index.twig
+</td>
+<td>
+sidebar-category-{term_id}.twig, sidebar-category.twig, sidebar.twig
+</td>
 </tr>
 <tr>
-<td>404</td>
-<td>Not Found &ndash; The specified kitten could not be found</td>
+<th>Custom Post Type Archives</th>
+<td>
+archive-{post_type}.twig, archive.twig, index.twig
+</td>
+<td>
+sidebar-archive-{post_type}.twig, sidebar.twig
+</td>
 </tr>
 <tr>
-<td>405</td>
-<td>Method Not Allowed &ndash; You tried to access a kitten with an invalid method</td>
+<th>Custom Taxonomy Archives</th>
+<td>
+taxonomy-{term}.twig, taxonomy-{taxonomy}.twig, archive.twig, index.twig
+</td>
+<td>
+sidebar-term-{term_id}.twig, sidebar-taxonomy-{taxonomy}.twig, sidebar-taxonomy.twig, sidebar.twig
+</td>
 </tr>
 <tr>
-<td>406</td>
-<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
+<th>Date Archives</th>
+<td>
+date.twig, archive.twig, index.twig
+</td>
+<td>
+sidebar-date.twig, sidebar.twig
+</td>
 </tr>
 <tr>
-<td>410</td>
-<td>Gone &ndash; The kitten requested has been removed from our servers</td>
+<th>Tag Archives</th>
+<td>
+tag-{slug}.twig, tag-{ID}.twig, tag.twig, archive.twig, index.twig
+</td>
+<td>
+sidebar-tag-{term_id}.twig, sidebar-tag.twig, sidebar.twig
+</td>
 </tr>
 <tr>
-<td>418</td>
-<td>I&rsquo;m a teapot</td>
+<th>Single Post</th>
+<td>
+single-post.twig, single.twig, index.twig
+</td>
+<td>
+sidebar-{post-ID}.twig, sidebar-post.twig, sidebar-single.twig, sidebar.twig
+</td>
 </tr>
 <tr>
-<td>429</td>
-<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slown down!</td>
+<th>Single Page</th>
+<td>
+page-{slug}.twig, page-{ID}.twig, page.twig, index.twig
+</td>
+<td>
+sidebar-{post-ID}.twig, sidebar-page.twig, sidebar-single.twig, sidebar.twig
+</td>
 </tr>
-<tr>
-<td>500</td>
-<td>Internal Server Error &ndash; We had a problem with our server. Try again later.</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintanance. Please try again later.</td>
-</tr>
-</tbody></table>
+</table>
+<h2 id='the-stucture-of-a-rendered-page'>The stucture of a rendered page</h2>
+<p>We divided the pages in sub-files in ordet to make them more modular.
+You can see the twig file template parts on the below diagram:
+<img alt="Twig Template Parts" src="https://press.codes/wp-content/uploads/template-structure.png" />
+<a href="https://press.codes/wp-content/uploads/template-structure.png">Get this file for a larger view</a></p>
+<h2 id='post-properties-in-twig-files'>Post properties in twig files</h2><pre><code class="highlight plaintext">{{ post.ID }}                 // ID of the post
+{{ post.post_author }}        // ID of the post author
+{{ post.post_date }}          // timestamp in local time
+{{ post.post_date_gmt }}      // timestamp in gmt time
+{{ post.post_content }}       // Full (unprocessed) body of the post
+{{ post.post_title }}         // title of the post
+{{ post.post_excerpt }}       // excerpt field of the post, caption if attachment
+{{ post.post_status }}        // post status: publish, new, pending, draft, auto-draft, future, private, inherit, trash
+{{ post.comment_status }}     // comment status: open, closed
+{{ post.ping_status }}        // ping/trackback status
+{{ post.post_password }}      // password of the post
+{{ post.post_name }}          // post slug, string to use in the URL
+{{ post.post_modified }}      // timestamp in local time
+{{ post.post_modified_gmt }}  // timestatmp in gmt time
+{{ post.post_parent }}        // id of the parent post.
+{{ post.guid }}               // global unique id of the post
+{{ post.menu_order }}         // menu order
+{{ post.post_type }}          // type of post: post, page, attachment, or custom string
+{{ post.post_mime_type }}     // mime type for attachment posts
+{{ post.comment_count }}      // number of comments
+{{ post.terms }}              // taxonomy terms
+{{ post.custom_field }}       // whatever custom field you've added (in the post_meta table)
+</code></pre>
 
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
+                <a href="#" data-language-name="php">php</a>
+                <a href="#" data-language-name="twig">twig</a>
+                <a href="#" data-language-name="css">css</a>
+                <a href="#" data-language-name="js">js</a>
           </div>
       </div>
     </div>
