@@ -92,6 +92,8 @@ html, body {
   // This is the logo at the top of the ToC
   &>img {
     display: block;
+    max-width: 96%;
+    padding: 20px 2%;
   }
 
   &>.search {
