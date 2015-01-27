@@ -8,11 +8,6 @@ You may want to use this filter to add aditional options. However, theme specifi
 
 ## maera/container_class
 
-This filter will change or add the class to the main container.
-You may want to use this filter to change the width of the container or to append a certain CSS class.
-
-Example:
-
 ```php
 <?php
 function my_container_class() {
@@ -33,13 +28,10 @@ function my_container_class() {
 add_filter( 'maera/container_class', 'maera_container_class' );
 ?>
 ```
-
+This filter will change or add the class to the main container.
+You may want to use this filter to change the width of the container or to append a certain CSS class.
 
 ## maera/content_width
-
-You may want to use this filter to change the default width of the container.
-
-Example:
 
 ```php
 <?php
@@ -56,14 +48,15 @@ add_filter( 'maera/content_width', 'maera_' );
 ?>
 ```
 
+You may want to use this filter to change the default width of the container.
+
+The content_width can be used in your `twig` files using `{{ content_width }}` and in some shells we use it to calculate for example the width of featured images.
+
 ## maera/image/height
-
-You may want to use this filter to change the height of featured images. This may be useful when creating fluid, concise layouts.
-
-Example: Set the height of featured images to 200px
 
 ```php
 <?php
+// Set the height of featured images to 200px
 function my_featured_images_height() {
     return 200;
 }
@@ -71,35 +64,36 @@ add_action( 'maera/image/height', 'my_featured_images_height' );
 ?>
 ```
 
+You may want to use this filter to change the height of featured images. This may be useful when creating fluid, concise layouts.
+
 ## maera/image/width
-
-You may want to use this filter to change the width of featured images. This may be useful when creating fluid, concise layouts.
-
-Example: Set the width of featured images to 450px
 
 ```php
 <?php
+
+// Set the width of featured images to 450px
 function my_featured_images_width() {
     return 450;
 }
 add_action( 'maera/image/height', 'my_featured_images_width' );
+
 ?>
 ```
+You may want to use this filter to change the width of featured images. This may be useful when creating fluid, concise layouts.
 
 ## maera/section_class/primary
 
-Allows you to add classes to the primary sidebar.
-
-Example:
-
 ```php
 <?php
+
 function my_sidebar_primary_classes( $class ) {
     return $class . ' primary col-sm-6 col-md-4 col-lg-3';
 }
 add_action( 'maera/section_class/primary', 'my_sidebar_primary_classes' );
+
 ?>
 ```
+Allows you to add classes to the primary sidebar.
 
 ## maera/section_class/secondary
 
@@ -111,10 +105,6 @@ Allows you to add classes to the secondary sidebar. Usage is exactly the same as
 Allows you to add classes to a wrapper div that includes the content area and the primary sidebar. Particularty useful if you're trying to achieve a template that has 3 columns and you need to float the content and sidebar to the right. Usage is exactly the same as the [maera/section_class/primary](#maerasection_classprimary) action.
 
 ## maera/shells/available
-
-You can use this filter to add your own shell in the list of available shells so that users can select and activate it.
-
-Usage:
 
 ```php
 <?php
@@ -138,14 +128,11 @@ add_filter( 'maera/shells/available', 'maera_shell_core_include' );
 
 ?>
 ```
+You can use this filter to add your own shell in the list of available shells so that users can select and activate it.
 
-More info can be found on the [[Defining a shell]] page.
+More info can be found on the [Building a Shell](#building-a-shell) page.
 
 ## maera/styles
-
-If you need to add some custom CSS to your page, you can use this filter.
-
-Usage:
 
 ```php
 <?php
@@ -168,12 +155,9 @@ add_action( 'maera/styles', 'custom_header_css' );
 
 ?>
 ```
+If you need to add some custom CSS to your page, you can use this filter.
 
 ## maera/stylesheet/url
-
-Changes the URL of the stylesheet to be loaded. You can use that if you're building your own shell to replace the default, empty stylesheet with your own.
-
-Usage:
 
 ```php
 <?php
@@ -184,12 +168,9 @@ function my_stylesheet_url() {
 add_filter( 'maera/stylesheet/url', array( $this, 'my_stylesheet_url' ) );
 ?>
 ```
+Changes the URL of the stylesheet to be loaded. You can use that if you're building your own shell to replace the default, empty stylesheet with your own.
 
 ## maera/stylesheet/ver
-
-Changes the version of the stylesheet for cache custing.
-
-Usage:
 
 ```php
 <?php
@@ -204,6 +185,7 @@ function my_stylesheet_version() {
 add_filter( 'maera/stylesheet/ver', array( $this, 'my_stylesheet_version' ) );
 ?>
 ```
+Changes the version of the stylesheet for cache custing.
 
 ## Other filters (to be documented):
 * maera/sidebar/footer
