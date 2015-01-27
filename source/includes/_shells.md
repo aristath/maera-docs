@@ -144,6 +144,29 @@ From that point on it's all up to your inspiration!
 </div>
 ```
 
+> If we were using [Bootstrap 3](http://getbootstrap.com/) for example on our shell, the result would look like this:
+
+```html
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-8 col-lg-9">
+            <p>12 columns on a mobile,</p>
+            <p>6 columns on a tablet</p>
+            <p>8 columns on a normal screen</p>
+            <p>9 columns on large screens</p>
+            <p>The actual implementation depends on the shell.</p>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <p>12 columns on a mobile</p>
+            <p>6 columns on a tablet</p>
+            <p>4 columns on a normal screen</p>
+            <p>3 columns on large screens</p>
+            <p>The actual implementation depends on the shell.</p>
+        </div>
+    </div>
+</div>
+```
+
 There are many CSS frameworks out there like for example Bootstrap, Foundation, Pure and lots more. Each one of them defines a grid, buttons, alert messages and a lot of other things using its unique HTML structure, CSS class names etc.
 
 We wanted to have a mechanism that will allow our plugins to be framework-agnostic, so if you write something in a plugin it can work no matter what shell/css-framework you use on your site.
@@ -156,9 +179,6 @@ As you can see on the example on the right, you **first have to import the macro
 
 On this code snippet we're first creating a container div. In that we're adding a row, and in that row 2 columns. The first column is wider and the second one is narrower. We have the flexibility to define separate width on a per-screen-size basis, or you can only define the medium size and the rest will be automatically filled-in.
 
-If we were using [Bootstrap 3](http://getbootstrap.com/) for example on our shell, the result would look like this:
-
-`<div class="container"><div class="row"><div class="col-xs-12 col-sm-6 col-md-8 col-lg-9"><p>12 columns on a mobile,</p><p>6 columns on a tablet</p><p>8 columns on a normal screen</p><p>9 columns on large screens</p><p>The actual implementation depends on the shell.</p></div><div class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><p>12 columns on a mobile</p><p>6 columns on a tablet</p><p>4 columns on a normal screen</p><p>3 columns on large screens</p><p>The actual implementation depends on the shell.</p></div></div></div>`
 
 If you're building a site for yourself or a client you may not need these, but as a good practice we recommend you do use them so that your site & templates will still work and be properly styled even if you completely change the shell & CSS framework you're using.
 No matter what happens, your templates will always use the proper CSS classes provided by your shell.
@@ -179,6 +199,30 @@ No matter what happens, your templates will always use the proper CSS classes pr
     </div>
 </div>
 ```
+
+> If we were using [Bootstrap 3](http://getbootstrap.com/) for example on our shell, the result would look like this:
+
+```html
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <p>12 columns on a mobile,</p>
+            <p>6 columns on a tablet</p>
+            <p>8 columns on a normal screen</p>
+            <p>9 columns on large screens</p>
+            <p>The actual implementation depends on the shell.</p>
+        </div>
+        <div class="col-md-4">
+            <p>12 columns on a mobile</p>
+            <p>6 columns on a tablet</p>
+            <p>4 columns on a normal screen</p>
+            <p>3 columns on large screens</p>
+            <p>The actual implementation depends on the shell.</p>
+        </div>
+    </div>
+</div>
+```
+
 In addition to normal macros, we also have shortcode-like syntax that can be entered wherever you want.
 In some cases they are not as versatile as their corresponding macros, but they are a lot easier to implement and in most cases they will achieve the exact same result.
 The great thing about them is that you can also use them **in your content**, so you can simply use them when using the WordPress content editor. This will allow you to have your content play nicely no matter which shell you're using. So you can be using [Bootstrap](http://getbootstrap.com/) now and [foundation](http://foundation.zurb.com/) next month, or even [purecss](http://purecss.io/) and your content and customisations will look nice wherever you are.

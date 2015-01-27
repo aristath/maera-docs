@@ -17,7 +17,6 @@ To add your own templates you can create a [Child Theme](href="http://codex.word
 The template hierarchy of the twig files is the same as the [default WordPress templates structure](href="http://wphierarchy.com/), simply by replacing the `.php` suffix with `.twig`.
 You can keep your `.twig` files in the root of your child theme, or a `/views` folder if you want to keep things a little more organized.
 
----
 
 ## Template hierarchy
 
@@ -185,30 +184,30 @@ You can see the twig file template parts on the below diagram:
 
 ## Post properties in twig files
 
-```html
-{{ post.ID }}                 // ID of the post
-{{ post.post_author }}        // ID of the post author
-{{ post.post_date }}          // timestamp in local time
-{{ post.post_date_gmt }}      // timestamp in gmt time
-{{ post.post_content }}       // Full (unprocessed) body of the post
-{{ post.post_title }}         // title of the post
-{{ post.post_excerpt }}       // excerpt field of the post, caption if attachment
-{{ post.post_status }}        // the post status
-{{ post.comment_status }}     // comment status: open, closed
-{{ post.ping_status }}        // ping/trackback status
-{{ post.post_password }}      // password of the post
-{{ post.post_name }}          // post slug, string to use in the URL
-{{ post.post_modified }}      // timestamp in local time
-{{ post.post_modified_gmt }}  // timestatmp in gmt time
-{{ post.post_parent }}        // id of the parent post.
-{{ post.guid }}               // global unique id of the post
-{{ post.menu_order }}         // menu order
-{{ post.post_type }}          // type of post: post, page, attachment, or custom string
-{{ post.post_mime_type }}     // mime type for attachment posts
-{{ post.comment_count }}      // number of comments
-{{ post.terms }}              // taxonomy terms
-{{ post.custom_field }}       // custom fields (replace custom_field with your own)
-```
+Property | Functionality
+-------- | -------------
+`{{ post.ID }}`                 | ID of the post
+`{{ post.post_author }}`        | ID of the post author
+`{{ post.post_date }}`          | timestamp in local time
+`{{ post.post_date_gmt }}`      | timestamp in gmt time
+`{{ post.post_content }}`       | Full (unprocessed) body of the post
+`{{ post.post_title }}`         | title of the post
+`{{ post.post_excerpt }}`       | excerpt field of the post, caption if attachment
+`{{ post.post_status }}`        | the post status
+`{{ post.comment_status }}`     | comment status: open, closed
+`{{ post.ping_status }}`        | ping/trackback status
+`{{ post.post_password }}`      | password of the post
+`{{ post.post_name }}`          | post slug, string to use in the URL
+`{{ post.post_modified }}`      | timestamp in local time
+`{{ post.post_modified_gmt }}`  | timestatmp in gmt time
+`{{ post.post_parent }}`        | id of the parent post.
+`{{ post.guid }}`               | global unique id of the post
+`{{ post.menu_order }}`         | menu order
+`{{ post.post_type }}`          | type of post: post, page, attachment, or custom string
+`{{ post.post_mime_type }}`     | mime type for attachment posts
+`{{ post.comment_count }}`      | number of comments
+`{{ post.terms }}`              | taxonomy terms
+`{{ post.custom_field }}`       | custom fields (replace custom_field with your own)
 
 You can use post properties, fields and content in your `.twig` template files however you want.
 On the right you can see what is available and what it does.
