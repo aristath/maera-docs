@@ -23,14 +23,14 @@ under the License.
 
 // BACKGROUND COLORS
 ////////////////////
-$nav-bg: #393939;
-$examples-bg: #393939;
-$code-bg: #292929;
-$code-annotation-bg: #1c1c1c;
-$nav-subitem-bg: #262626;
+$nav-bg: #455a64;
+$examples-bg: #37474f;
+$code-bg: #263238;
+$code-annotation-bg: #37474f;
+$nav-subitem-bg: #37474f;
 $nav-active-bg: #2467af;
-$lang-select-border: #000;
-$lang-select-bg: #222;
+$lang-select-border: #263238;
+$lang-select-bg: #263238;
 $lang-select-active-bg: $examples-bg; // feel free to change this to blue or something
 $lang-select-pressed-bg: #111; // color of language tab bg when mouse is pressed
 $main-bg: #eaf2f6;
@@ -69,7 +69,7 @@ $phone-width: $tablet-width - $nav-width; // min width before reverting to mobil
 ////////////////////
 %default-font {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 13px;
+  font-size: 16px;
 }
 
 %header-font {
@@ -86,12 +86,12 @@ $phone-width: $tablet-width - $nav-width; // min width before reverting to mobil
 
 // OTHER
 ////////////////////
-$nav-active-shadow: #000;
+$nav-active-shadow: none;
 $nav-footer-border-color: #666;
 $nav-embossed-border-top: #000;
-$nav-embossed-border-bottom: #939393;
-$main-embossed-text-shadow: 0px 1px 0px #fff;
-$search-box-border-color: #666;
+$nav-embossed-border-bottom: #b0bec5;
+$main-embossed-text-shadow: none;
+$search-box-border-color: #607d8b;
 
 
 ////////////////////////////////////////////////////////////////////////////////

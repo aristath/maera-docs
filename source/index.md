@@ -9,7 +9,6 @@ language_tabs:
 
 toc_footers:
   - <a href='https://press.codes/checkout?edd_action=add_to_cart&download_id=657809'>Get the theme</a>
-  - <a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a>
 
 includes:
   - shells
