@@ -5,15 +5,11 @@ Maera is a WordPress theme and as such it follows the default WordPress [templat
 In addition to the default template files that you can use if you want, we also provide a "views" folder that contains "twig" files. You can learn more about the twig language by clicking on [this link](http://twig.sensiolabs.org/).
 `twig` files have a structure and syntax a lot easier and more user-friendly than php. For example if you wanted to echo something in PHP, you would do this:
 
-```php
-<?php echo $foo; ?>
-```
+`<?php echo $foo; ?>`
 
 In twig however it's a lot simpler than that:
 
-```twig
-{{ foo }}
-```
+`{{ foo }}`
 
 You can learn more about the syntax and naming conventions by reading the [Timber Docs](https://github.com/jarednova/timber/wiki).
 
