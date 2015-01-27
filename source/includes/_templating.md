@@ -23,84 +23,161 @@ You can keep your `.twig` files in the root of your child theme, or a `/views` f
 
 ---
 
-## Template hierarchy on the Maera theme:
+## Template hierarchy
+
+You can create additional `.twig` files in a child them (or a shell) if you need to override the default template for a post, a page, a taxonomy or whatever you want.
+
+On the table below you can see the template hierarchy used by Maera for `.twig` template files.
+
 <table>
-<th>
-<td>Content Template</td>
-<td>Sidebar Template</td>
-</th>
-<tr>
-<th>Author Archives</th>
-<td>
-author-{nicename}.twig, author-{ID}.twig, author.twig, archive.twig, index.twig
-</td>
-<td>
-sidebar.twig
-</td>
-</tr>
-<tr>
-<th>Category Archives</th>
-<td>
-category-{slug}.twig, category-{ID}.twig, category.twig, archive.twig, index.twig
-</td>
-<td>
-sidebar-category-{term_id}.twig, sidebar-category.twig, sidebar.twig
-</td>
-</tr>
-<tr>
-<th>Custom Post Type Archives</th>
-<td>
-archive-{post_type}.twig, archive.twig, index.twig
-</td>
-<td>
-sidebar-archive-{post_type}.twig, sidebar.twig
-</td>
-</tr>
-<tr>
-<th>Custom Taxonomy Archives</th>
-<td>
-taxonomy-{term}.twig, taxonomy-{taxonomy}.twig, archive.twig, index.twig
-</td>
-<td>
-sidebar-term-{term_id}.twig, sidebar-taxonomy-{taxonomy}.twig, sidebar-taxonomy.twig, sidebar.twig
-</td>
-</tr>
-<tr>
-<th>Date Archives</th>
-<td>
-date.twig, archive.twig, index.twig
-</td>
-<td>
-sidebar-date.twig, sidebar.twig
-</td>
-</tr>
-<tr>
-<th>Tag Archives</th>
-<td>
-tag-{slug}.twig, tag-{ID}.twig, tag.twig, archive.twig, index.twig
-</td>
-<td>
-sidebar-tag-{term_id}.twig, sidebar-tag.twig, sidebar.twig
-</td>
-</tr>
-<tr>
-<th>Single Post</th>
-<td>
-single-post.twig, single.twig, index.twig
-</td>
-<td>
-sidebar-{post-ID}.twig, sidebar-post.twig, sidebar-single.twig, sidebar.twig
-</td>
-</tr>
-<tr>
-<th>Single Page</th>
-<td>
-page-{slug}.twig, page-{ID}.twig, page.twig, index.twig
-</td>
-<td>
-sidebar-{post-ID}.twig, sidebar-page.twig, sidebar-single.twig, sidebar.twig
-</td>
-</tr>
+    <th>
+        <td>Content Template</td>
+    </th>
+    <tr>
+        <th>Author Archives</th>
+        <td>
+            <p>author-{nicename}.twig</p>
+            <p>author-{ID}.twig</p>
+            <p>author.twig</p>
+            <p>archive.twig</p>
+            <p>index.twig</p>
+        </td>
+    </tr>
+    <tr>
+        <th>Category Archives</th>
+        <td>
+            <p>category-{slug}.twig</p>
+            <p>category-{ID}.twig</p>
+            <p>category.twig</p>
+            <p>archive.twig</p>
+            <p>index.twig</p>
+        </td>
+    </tr>
+    <tr>
+        <th>Custom Post Type Archives</th>
+        <td>
+            <p>archive-{post_type}.twig</p>
+            <p>archive.twig</p>
+            <p>index.twig</p>
+        </td>
+    </tr>
+    <tr>
+        <th>Custom Taxonomy Archives</th>
+        <td>
+            <p>taxonomy-{term}.twig</p>
+            <p>taxonomy-{taxonomy}.twig</p>
+            <p>archive.twig</p>
+            <p>index.twig</p>
+        </td>
+    </tr>
+    <tr>
+        <th>Date Archives</th>
+        <td>
+            <p>date.twig</p>
+            <p>archive.twig</p>
+            <p>index.twig</p>
+        </td>
+    </tr>
+    <tr>
+        <th>Tag Archives</th>
+            <td>
+                <p>tag-{slug}.twig</p>
+                <p>tag-{ID}.twig</p>
+                <p>tag.twig</p>
+                <p>archive.twig</p>
+                <p>index.twig</p>
+            </td>
+    </tr>
+    <tr>
+        <th>Single Post</th>
+        <td>
+            <p>single-post.twig</p>
+            <p>single.twig</p>
+            <p>index.twig</p>
+        </td>
+    </tr>
+    <tr>
+        <th>Single Page</th>
+        <td>
+            <p>page-{slug}.twig</p>
+            <p>page-{ID}.twig</p>
+            <p>page.twig</p>
+            <p>index.twig</p>
+        </td>
+    </tr>
+</table>
+
+## Sidebar Template Hierarchy
+
+If you want to override the sidebar for a category or a page, you can do so easily by using a custom `.twig` template file for your sidebar.
+
+You can use the table below to see what file-name you will have to use to achieve the results you're after.
+
+<table>
+    <th><td>Sidebar Template</td></th>
+    <tr>
+        <th>Author Archives</th>
+        <td>
+            <p>sidebar.twig</p>
+        </td>
+    </tr>
+    <tr>
+        <th>Category Archives</th>
+    <td>
+        <p>sidebar-category-{term_id}.twig</p>
+        <p>sidebar-category.twig</p>
+        <p>sidebar.twig</p>
+    </td>
+    </tr>
+    <tr>
+        <th>Custom Post Type Archives</th>
+        <td>
+        <p>sidebar-archive-{post_type}.twig</p>
+        <p>sidebar.twig</p>
+        </td>
+    </tr>
+    <tr>
+        <th>Custom Taxonomy Archives</th>
+        <td>
+            <p>sidebar-term-{term_id}.twig</p>
+            <p>sidebar-taxonomy-{taxonomy}.twig</p>
+            <p>sidebar-taxonomy.twig</p>
+            <p>sidebar.twig</p>
+        </td>
+    </tr>
+    <tr>
+        <th>Date Archives</th>
+        <td>
+            <p>sidebar-date.twig</p>
+            <p>sidebar.twig</p>
+        </td>
+    </tr>
+    <tr>
+        <th>Tag Archives</th>
+        <td>
+            <p>sidebar-tag-{term_id}.twig</p>
+            <p>sidebar-tag.twig</p>
+            <p>sidebar.twig</p>
+        </td>
+    </tr>
+    <tr>
+        <th>Single Post</th>
+        <td>
+            <p>sidebar-{post-ID}.twig</p>
+            <p>sidebar-post.twig</p>
+            <p>sidebar-single.twig</p>
+            <p>sidebar.twig</p>
+        </td>
+    </tr>
+    <tr>
+        <th>Single Page</th>
+        <td>
+            <p>sidebar-{post-ID}.twig</p>
+            <p>sidebar-page.twig</p>
+            <p>sidebar-single.twig</p>
+            <p>sidebar.twig</p>
+        </td>
+    </tr>
 </table>
 
 ## The stucture of a rendered page
@@ -120,7 +197,7 @@ You can see the twig file template parts on the below diagram:
 {{ post.post_content }}       // Full (unprocessed) body of the post
 {{ post.post_title }}         // title of the post
 {{ post.post_excerpt }}       // excerpt field of the post, caption if attachment
-{{ post.post_status }}        // post status: publish, new, pending, draft, auto-draft, future, private, inherit, trash
+{{ post.post_status }}        // the post status
 {{ post.comment_status }}     // comment status: open, closed
 {{ post.ping_status }}        // ping/trackback status
 {{ post.post_password }}      // password of the post
@@ -134,5 +211,8 @@ You can see the twig file template parts on the below diagram:
 {{ post.post_mime_type }}     // mime type for attachment posts
 {{ post.comment_count }}      // number of comments
 {{ post.terms }}              // taxonomy terms
-{{ post.custom_field }}       // whatever custom field you've added (in the post_meta table)
+{{ post.custom_field }}       // custom fields (replace custom_field with your own)
 ```
+
+You can use post properties, fields and content in your `.twig` template files however you want.
+On the right you can see what is available and what it does.
