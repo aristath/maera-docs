@@ -26,7 +26,7 @@
       </span>
     </a>
     <div class="tocify-wrapper">
-      <img src="images/logo.png" />
+      <a class="logo" href="/"><img src="images/logo.png" /></a>
         <div class="lang-selector">
               <a href="#" data-language-name="php">php</a>
               <a href="#" data-language-name="twig">twig</a>
@@ -57,16 +57,250 @@ In its heart it uses the <a href="http://twig.sensiolabs.org/">twig templating e
 
 <p>With Maera we&rsquo;re introducing the concept of theme <strong>shells</strong>.  An easy way to completely customize the theme with your own markup, css, scripts and functionality to meet your own needs!</p>
 
-          <h1 id='actions'>Actions</h1><h2 id='generic-actions'>Generic actions</h2>
-<p><code class="prettyprint">maera/admin/save</code></p>
+          <h1 id='shells'>Shells</h1><h2 id='what-shells-are'>What Shells are</h2>
+<p>Shells can be built as plugins and allow you to completely custom-code your own theme, overriding the default templates of the theme as well as its stylesheets and other scripts.</p>
+
+<p>The default templates of the theme already include a lot of hooks and actions you can use, allowing for a sane markup, SEO-optimization and easy to modify using a <a href="/docs/shells/macros/">shell macros</a> file.</p>
+<h2 id='building-a-shell'>Building a Shell</h2>
+<p>Maera makes it easy to create new shells.</p>
+
+<p>The recommended method to create a new shell is by writing a custom WordPress plugin.</p>
+
+<p>The first step will be to create our main plugin file. In this case we will call this file <code class="prettyprint">shell.php</code> and add the following code in it:</p>
+<pre><code class="highlight php"><span class="cp">&lt;?php</span>
+<span class="cm">/*
+Plugin Name:         Example Shell
+Description:         This is just an example of how to build a shell plugin for the Maera theme
+Version:             0.1
+Author:              me
+Author URI:          http://example.com
+*/</span>
+
+<span class="nb">define</span><span class="p">(</span> <span class="s1">'MAERA_EXAMPLE_SHELL_URL'</span><span class="p">,</span> <span class="nx">plugins_url</span><span class="p">(</span> <span class="s1">''</span><span class="p">,</span> <span class="k">__FILE__</span> <span class="p">)</span> <span class="p">);</span>
+<span class="nb">define</span><span class="p">(</span> <span class="s1">'MAERA_EXAMPLE_SHELL_PATH'</span><span class="p">,</span> <span class="nb">dirname</span><span class="p">(</span> <span class="k">__FILE__</span> <span class="p">)</span> <span class="p">);</span>
+
+<span class="sd">/**
+ * Include the shell
+ */</span>
+<span class="k">function</span> <span class="nf">maera_shell_example_include</span><span class="p">(</span> <span class="nv">$shells</span> <span class="p">)</span> <span class="p">{</span>
+
+    <span class="c1">// Add our shell to the array of available shells
+</span>    <span class="nv">$shells</span><span class="p">[]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+
+        <span class="c1">// Alphanumeric (lowercase name of our shell)
+</span>        <span class="s1">'value'</span> <span class="o">=&gt;</span> <span class="s1">'example'</span><span class="p">,</span>
+
+        <span class="c1">// The full name of our shell.
+</span>        <span class="c1">// This will be used in the shell selection option in the dashboard
+</span>        <span class="s1">'label'</span> <span class="o">=&gt;</span> <span class="s1">'Example'</span><span class="p">,</span>
+
+        <span class="c1">// The name of our Shell Class.
+</span>        <span class="c1">// We're going to include everything concerning our shell there.
+</span>        <span class="s1">'class'</span> <span class="o">=&gt;</span> <span class="s1">'Maera_Example_Shell'</span><span class="p">,</span>
+
+    <span class="p">);</span>
+
+    <span class="k">return</span> <span class="nv">$shells</span><span class="p">;</span>
+
+<span class="p">}</span>
+<span class="c1">// Add our shell to the list of available shells
+</span><span class="nx">add_filter</span><span class="p">(</span> <span class="s1">'maera/shells/available'</span><span class="p">,</span> <span class="s1">'maera_shell_bootstrap_include'</span> <span class="p">);</span>
+
+<span class="sd">/**
+ * Next we will build our main shell class which will contain all the functionality of our shell.
+ * We will be loading our stylesheets, scripts and anything else required by our shell here.
+ */</span>
+
+<span class="sd">/**
+ * The Shell
+ */</span>
+<span class="k">class</span> <span class="nc">Maera_Example_Shell</span> <span class="p">{</span>
+
+    <span class="k">private</span> <span class="k">static</span> <span class="nv">$instance</span><span class="p">;</span>
+
+    <span class="sd">/**
+     * Add any actions &amp; filters we may be using.
+     * This is where you'll probably be executing any custom functions that you add to this class.
+     * These are executed as soon as the class is instantiated.
+     */</span>
+    <span class="k">private</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">()</span> <span class="p">{</span>
+
+        <span class="nx">do_action</span><span class="p">(</span> <span class="s1">'maera/shell/include_modules'</span> <span class="p">);</span>
+
+        <span class="c1">// CAUTION: DO NOT DELETE THIS.
+</span>        <span class="k">if</span> <span class="p">(</span> <span class="o">!</span> <span class="nb">defined</span><span class="p">(</span> <span class="s1">'MAERA_SHELL_PATH'</span> <span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="nb">define</span><span class="p">(</span> <span class="s1">'MAERA_SHELL_PATH'</span><span class="p">,</span> <span class="nb">dirname</span><span class="p">(</span> <span class="k">__FILE__</span> <span class="p">)</span> <span class="p">);</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+
+    <span class="sd">/**
+     * This is required to instantiate our shell.
+     * CAUTION, DO NOT DELETE THIS FUNCTION.
+     */</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">get_instance</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="kc">null</span> <span class="o">==</span> <span class="nx">self</span><span class="o">::</span><span class="nv">$instance</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="nx">self</span><span class="o">::</span><span class="nv">$instance</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">self</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nx">self</span><span class="o">::</span><span class="nv">$instance</span><span class="p">;</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+
+<p>You can extend that class and create your own methods and functions but the above code is the bare minimum to create and use a new shell.
+From that point on it&rsquo;s all up to your inspiration!</p>
+<h2 id='shell-macros'>Shell Macros</h2>
+<p>There are many CSS frameworks out there like for example Bootstrap, Foundation, Pure and lots more. Each one of them defines a grid, buttons, alert messages and a lot of other things using its unique HTML structure, CSS class names etc.</p>
+
+<p>We wanted to have a mechanism that will allow our plugins to be framework-agnostic, so if you write something in a plugin it can work no matter what shell/css-framework you use on your site.</p>
+
+<p>To that end we are using <a href="http://twig.sensiolabs.org/doc/tags/macro.html">twig macros</a>.<br>
+Macros are a way to standardize some common functionalities that most frameworks have (such as for example a grid or buttons) while at the same time allowing us to easily change these when creating a new shell.<br>
+You can see a list of the default macros in <a href="https://github.com/presscodes/maera/tree/master/views/macros">the github repository</a>.<br>
+For example the macro to create a new row in the core shell looks like this:</p>
+<pre><code class="highlight plaintext">{% macro row_open(element, id, extra_classes, properties) %}
+    &lt;{{ element|default('div') }} class="g{{ extra_classes ? ' '~extra_classes : '' }}"{{ id ? ' id="'~id~'"' : '' }}{{ properties ? ' '~properties : '' }}&gt;
+{% endmacro %}
+</code></pre>
+
+<p>If you want to use this macro in a twig custom twig file in your templates you will first have to import it by adding this line at the top of your twig file:</p>
+<pre><code class="highlight plaintext">{% from 'row_open.html.twig' import row_open as row_open %}
+</code></pre>
+
+<p>and then you can use it to open a row like this:</p>
+<pre><code class="highlight plaintext">{{ row_open( 'div', 'content', 'bg' ) }}
+</code></pre>
+
+<p>The above will have this as a result:</p>
+<pre><code class="highlight html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"g bg"</span> <span class="na">id=</span><span class="s">"content"</span><span class="nt">&gt;</span>
+</code></pre>
+
+<p>In addition, we also have shortcode-like syntax that can be entered wherever you want. The available functions that you can use this way are:</p>
+
+<p><code class="prettyprint">[maera_grid_container_open]</code> - opens a container div<br>
+<code class="prettyprint">[maera_grid_container_close]</code> - closes a container div<br>
+<code class="prettyprint">[maera_grid_container_class]</code> - the class of the container</p>
+
+<p><code class="prettyprint">[maera_grid_row_open]</code> - open a row div<br>
+<code class="prettyprint">[maera_grid_row_close]</code> - closes a row div<br>
+<code class="prettyprint">[maera_grid_row_class]</code> - the class of the row</p>
+
+<p><code class="prettyprint">[maera_grid_col_1]</code> - the column classes for width 1/12<br>
+<code class="prettyprint">[maera_grid_col_2]</code> - the column classes for width 2/12<br>
+<code class="prettyprint">[maera_grid_col_3]</code> - the column classes for width 3/12<br>
+<code class="prettyprint">[maera_grid_col_4]</code> - the column classes for width 4/12<br>
+<code class="prettyprint">[maera_grid_col_5]</code> - the column classes for width 5/12<br>
+<code class="prettyprint">[maera_grid_col_6]</code> - the column classes for width 6/12<br>
+<code class="prettyprint">[maera_grid_col_7]</code> - the column classes for width 7/12<br>
+<code class="prettyprint">[maera_grid_col_8]</code> - the column classes for width 8/12<br>
+<code class="prettyprint">[maera_grid_col_9]</code> - the column classes for width 9/12<br>
+<code class="prettyprint">[maera_grid_col_10]</code> - the column classes for width 10/12<br>
+<code class="prettyprint">[maera_grid_col_11]</code> - the column classes for width 11/12<br>
+<code class="prettyprint">[maera_grid_col_12]</code> - the column classes for width 12/12  </p>
+
+<p><code class="prettyprint">[maera_button_default_extra_small]</code> - classes for default, extra-small buttons<br>
+<code class="prettyprint">[maera_button_default_small]</code> - classes for default, small buttons<br>
+<code class="prettyprint">[maera_button_default_medium]</code> - classes for default, medium buttons<br>
+<code class="prettyprint">[maera_button_default_large]</code> - classes for default, large buttons<br>
+<code class="prettyprint">[maera_button_default_extra_large]</code> - classes for default, extra-large buttons  </p>
+
+<p><code class="prettyprint">[maera_button_primary_extra_small]</code> - classes for primary, extra-small buttons<br>
+<code class="prettyprint">[maera_button_primary_small]</code> - classes for primary, small buttons<br>
+<code class="prettyprint">[maera_button_primary_medium]</code> - classes for primary, medium buttons<br>
+<code class="prettyprint">[maera_button_primary_large]</code> - classes for primary, large buttons<br>
+<code class="prettyprint">[maera_button_primary_extra_large]</code> - classes for primary, extra-large buttons  </p>
+
+<p><code class="prettyprint">[maera_button_success_extra_small]</code> - classes for success, extra-small buttons<br>
+<code class="prettyprint">[maera_button_success_small]</code> - classes for success, small buttons<br>
+<code class="prettyprint">[maera_button_success_medium]</code> - classes for success, medium buttons<br>
+<code class="prettyprint">[maera_button_success_large]</code> - classes for success, large buttons<br>
+<code class="prettyprint">[maera_button_success_extra_large]</code> - classes for success, extra-large buttons  </p>
+
+<p><code class="prettyprint">[maera_button_info_extra_small]</code> - classes for info, extra-small buttons<br>
+<code class="prettyprint">[maera_button_info_small]</code> - classes for info, small buttons<br>
+<code class="prettyprint">[maera_button_info_medium]</code> - classes for info, medium buttons<br>
+<code class="prettyprint">[maera_button_info_large]</code> - classes for info, large buttons<br>
+<code class="prettyprint">[maera_button_info_extra_large]</code> - classes for info, extra-large buttons  </p>
+
+<p><code class="prettyprint">[maera_button_warning_extra_small]</code> - classes for warning, extra small buttons<br>
+<code class="prettyprint">[maera_button_warning_small]</code> - classes for warning, small buttons<br>
+<code class="prettyprint">[maera_button_warning_medium]</code> - classes for warning, medium buttons<br>
+<code class="prettyprint">[maera_button_warning_large]</code> - classes for warning, large buttons<br>
+<code class="prettyprint">[maera_button_warning_extra_large]</code> - classes for warning, extra-large buttons  </p>
+
+<p><code class="prettyprint">[maera_button_danger_extra_small]</code> - classes for danger, extra-small buttons<br>
+<code class="prettyprint">[maera_button_danger_small]</code> - classes for danger, small buttons<br>
+<code class="prettyprint">[maera_button_danger_medium]</code> - classes for danger, medium buttons<br>
+<code class="prettyprint">[maera_button_danger_large]</code> - classes for danger, large buttons<br>
+<code class="prettyprint">[maera_button_danger_extra_large]</code> - classes for danger, extra-large buttons  </p>
+
+<p><code class="prettyprint">[maera_button_link_extra_small]</code> - classes for link, extra-small buttons<br>
+<code class="prettyprint">[maera_button_link_small]</code> - classes for link, small buttons<br>
+<code class="prettyprint">[maera_button_link_medium]</code> - classes for link, medium buttons<br>
+<code class="prettyprint">[maera_button_link_large]</code> - classes for link, large buttons<br>
+<code class="prettyprint">[maera_button_link_extra_large]</code> - classes for link, extra-large buttons  </p>
+
+<p>Example scenario: A row that has a 3-column layout inside. The 1st column is half the width of the page, the 2nd column is a 3rd of the page width and the 3rd column is 1 6th of the page width. The 1st and 2nd columns also have a button in them:  </p>
+<pre><code class="highlight html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"[maera_grid_row_class]"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"[maera_grid_col_6]"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;p&gt;</span>This column has a width of 6/12 (half the page/content)<span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"[maera_button_success_small]"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>small green button<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"[maera_grid_col_4]"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;p&gt;</span>This column is 4/12 of the page/content (1 3rd of the width of its parent element)<span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"[maera_button_danger_large]"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>large red button<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"[maera_grid_col_2]"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;p&gt;</span>This column is 2/12 of the page/content width. That's too narrow and rarely used<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre>
+
+<p>Though the above example is pretty simplistic, it gives you an idea of how simple it is to implement these in your own templates. The great thing about them is that you can also use them <strong>in your content</strong>, so you can simply use them when using the WordPress content editor. This will allow you to have your content play nicely no matter which shell you&rsquo;re using. So you can be using <a href="http://getbootstrap.com/">Bootstrap</a> now and <a href="http://foundation.zurb.com/">foundation</a> next month, or even <a href="http://purecss.io/">purecss</a> and your content and customisations will look nice wherever you are.</p>
+
+          <h1 id='actions'>Actions</h1><h2 id='maeraadminsave'>maera/admin/save</h2><pre><code class="highlight php"><span class="cp">&lt;?php</span>
+
+<span class="k">function</span> <span class="nf">my_custom_action</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// do something when the customizer is saved.
+</span><span class="p">}</span>
+<span class="nx">add_action</span><span class="p">(</span> <span class="s1">'maera/admin/save'</span><span class="p">,</span> <span class="s1">'my_custom_action'</span> <span class="p">);</span>
+<span class="cp">?&gt;</span>
+</code></pre>
 
 <p>This action is run when the admin page is saved.
 An example usage is when we import the customizer options in a shell that uses a compiler. In that case, when we perform the import we may want to trigger the shell&rsquo;s compiler so that the stylesheets get re-generated, caches dumped etc.</p>
+<h2 id='maerashellinclude_modules'>maera/shell/include_modules</h2><pre><code class="highlight php"><span class="cp">&lt;?php</span>
 
-<p><code class="prettyprint">maera/shell/include_modules</code></p>
+<span class="k">function</span> <span class="nf">my_custom_action</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Include the my-file.php file when the shell starts.
+</span>    <span class="k">include_once</span><span class="p">(</span> <span class="nb">dirname</span><span class="p">(</span> <span class="k">__FILE__</span> <span class="p">)</span> <span class="o">.</span> <span class="s1">'/includes/my-file.php'</span> <span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">add_action</span><span class="p">(</span> <span class="s1">'maera/shell/include_modules'</span><span class="p">,</span> <span class="s1">'my_custom_action'</span> <span class="p">);</span>
+<span class="cp">?&gt;</span>
+</code></pre>
 
 <p>This action is run when the shell is being initialized.</p>
-<h2 id='content-injecting-actions'>Content-injecting actions</h2>
+<h2 id='content-injecting-actions'>Content-injecting actions</h2><pre><code class="highlight php"><span class="cp">&lt;?php</span>
+<span class="sd">/**
+* This function simply echoes some content.
+* In this example we inject it at the top of single posts
+* using the maera/single/top action.
+* You can similarty inject your content wherever you need
+* using any of the other actions available to you.
+*/</span>
+<span class="k">function</span> <span class="nf">my_custom_action</span><span class="p">()</span> <span class="p">{</span> <span class="cp">?&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"alert"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;p&gt;</span>This is a single post<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="cp">&lt;?php</span>
+<span class="p">}</span>
+<span class="nx">add_action</span><span class="p">(</span> <span class="s1">'maera/single/top'</span><span class="p">,</span> <span class="s1">'my_custom_action'</span> <span class="p">);</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+
 <ul>
 <li><code class="prettyprint">maera/wrap/before</code></li>
 <li><code class="prettyprint">maera/wrap/after</code></li>
@@ -278,210 +512,6 @@ You may want to use this filter to change the width of the container or to appen
 <li>maera/admin/tabs</li>
 <li>maera/section_class/content</li>
 </ul>
-
-          <h1 id='shells'>Shells</h1><h2 id='what-shells-are'>What Shells are</h2>
-<p>Shells can be built as plugins and allow you to completely custom-code your own theme, overriding the default templates of the theme as well as its stylesheets and other scripts.</p>
-
-<p>The default templates of the theme already include a lot of hooks and actions you can use, allowing for a sane markup, SEO-optimization and easy to modify using a <a href="/docs/shells/macros/">shell macros</a> file.</p>
-<h2 id='building-a-shell'>Building a Shell</h2>
-<p>Maera makes it easy to create new shells.</p>
-
-<p>The recommended method to create a new shell is by writing a custom WordPress plugin.</p>
-
-<p>The first step will be to create our main plugin file. In this case we will call this file <code class="prettyprint">shell.php</code> and add the following code in it:</p>
-<pre><code class="highlight php"><span class="cp">&lt;?php</span>
-<span class="cm">/*
-Plugin Name:         Example Shell
-Description:         This is just an example of how to build a shell plugin for the Maera theme
-Version:             0.1
-Author:              me
-Author URI:          http://example.com
-*/</span>
-
-<span class="nb">define</span><span class="p">(</span> <span class="s1">'MAERA_EXAMPLE_SHELL_URL'</span><span class="p">,</span> <span class="nx">plugins_url</span><span class="p">(</span> <span class="s1">''</span><span class="p">,</span> <span class="k">__FILE__</span> <span class="p">)</span> <span class="p">);</span>
-<span class="nb">define</span><span class="p">(</span> <span class="s1">'MAERA_EXAMPLE_SHELL_PATH'</span><span class="p">,</span> <span class="nb">dirname</span><span class="p">(</span> <span class="k">__FILE__</span> <span class="p">)</span> <span class="p">);</span>
-
-<span class="sd">/**
- * Include the shell
- */</span>
-<span class="k">function</span> <span class="nf">maera_shell_example_include</span><span class="p">(</span> <span class="nv">$shells</span> <span class="p">)</span> <span class="p">{</span>
-
-    <span class="c1">// Add our shell to the array of available shells
-</span>    <span class="nv">$shells</span><span class="p">[]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
-
-        <span class="c1">// Alphanumeric (lowercase name of our shell)
-</span>        <span class="s1">'value'</span> <span class="o">=&gt;</span> <span class="s1">'example'</span><span class="p">,</span>
-
-        <span class="c1">// The full name of our shell.
-</span>        <span class="c1">// This will be used in the shell selection option in the dashboard
-</span>        <span class="s1">'label'</span> <span class="o">=&gt;</span> <span class="s1">'Example'</span><span class="p">,</span>
-
-        <span class="c1">// The name of our Shell Class.
-</span>        <span class="c1">// We're going to include everything concerning our shell there.
-</span>        <span class="s1">'class'</span> <span class="o">=&gt;</span> <span class="s1">'Maera_Example_Shell'</span><span class="p">,</span>
-
-    <span class="p">);</span>
-
-    <span class="k">return</span> <span class="nv">$shells</span><span class="p">;</span>
-
-<span class="p">}</span>
-<span class="c1">// Add our shell to the list of available shells
-</span><span class="nx">add_filter</span><span class="p">(</span> <span class="s1">'maera/shells/available'</span><span class="p">,</span> <span class="s1">'maera_shell_bootstrap_include'</span> <span class="p">);</span>
-
-<span class="sd">/**
- * Next we will build our main shell class which will contain all the functionality of our shell.
- * We will be loading our stylesheets, scripts and anything else required by our shell here.
- */</span>
-
-<span class="sd">/**
- * The Shell
- */</span>
-<span class="k">class</span> <span class="nc">Maera_Example_Shell</span> <span class="p">{</span>
-
-    <span class="k">private</span> <span class="k">static</span> <span class="nv">$instance</span><span class="p">;</span>
-
-    <span class="sd">/**
-     * Add any actions &amp; filters we may be using.
-     * This is where you'll probably be executing any custom functions that you add to this class.
-     * These are executed as soon as the class is instantiated.
-     */</span>
-    <span class="k">private</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">()</span> <span class="p">{</span>
-
-        <span class="nx">do_action</span><span class="p">(</span> <span class="s1">'maera/shell/include_modules'</span> <span class="p">);</span>
-
-        <span class="c1">// CAUTION: DO NOT DELETE THIS.
-</span>        <span class="k">if</span> <span class="p">(</span> <span class="o">!</span> <span class="nb">defined</span><span class="p">(</span> <span class="s1">'MAERA_SHELL_PATH'</span> <span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
-            <span class="nb">define</span><span class="p">(</span> <span class="s1">'MAERA_SHELL_PATH'</span><span class="p">,</span> <span class="nb">dirname</span><span class="p">(</span> <span class="k">__FILE__</span> <span class="p">)</span> <span class="p">);</span>
-        <span class="p">}</span>
-
-    <span class="p">}</span>
-
-    <span class="sd">/**
-     * This is required to instantiate our shell.
-     * CAUTION, DO NOT DELETE THIS FUNCTION.
-     */</span>
-    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">get_instance</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span> <span class="kc">null</span> <span class="o">==</span> <span class="nx">self</span><span class="o">::</span><span class="nv">$instance</span> <span class="p">)</span> <span class="p">{</span>
-            <span class="nx">self</span><span class="o">::</span><span class="nv">$instance</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">self</span><span class="p">;</span>
-        <span class="p">}</span>
-
-        <span class="k">return</span> <span class="nx">self</span><span class="o">::</span><span class="nv">$instance</span><span class="p">;</span>
-    <span class="p">}</span>
-
-<span class="p">}</span>
-<span class="cp">?&gt;</span>
-</code></pre>
-
-<p>You can extend that class and create your own methods and functions but the above code is the bare minimum to create and use a new shell.
-From that point on it&rsquo;s all up to your inspiration!</p>
-<h2 id='shell-macros'>Shell Macros</h2>
-<p>There are many CSS frameworks out there like for example Bootstrap, Foundation, Pure and lots more. Each one of them defines a grid, buttons, alert messages and a lot of other things using its unique HTML structure, CSS class names etc.</p>
-
-<p>We wanted to have a mechanism that will allow our plugins to be framework-agnostic, so if you write something in a plugin it can work no matter what shell/css-framework you use on your site.</p>
-
-<p>To that end we are using <a href="http://twig.sensiolabs.org/doc/tags/macro.html">twig macros</a>.<br>
-Macros are a way to standardize some common functionalities that most frameworks have (such as for example a grid or buttons) while at the same time allowing us to easily change these when creating a new shell.<br>
-You can see a list of the default macros in <a href="https://github.com/presscodes/maera/tree/master/views/macros">the github repository</a>.<br>
-For example the macro to create a new row in the core shell looks like this:</p>
-<pre><code class="highlight plaintext">{% macro row_open(element, id, extra_classes, properties) %}
-    &lt;{{ element|default('div') }} class="g{{ extra_classes ? ' '~extra_classes : '' }}"{{ id ? ' id="'~id~'"' : '' }}{{ properties ? ' '~properties : '' }}&gt;
-{% endmacro %}
-</code></pre>
-
-<p>If you want to use this macro in a twig custom twig file in your templates you will first have to import it by adding this line at the top of your twig file:</p>
-<pre><code class="highlight plaintext">{% from 'row_open.html.twig' import row_open as row_open %}
-</code></pre>
-
-<p>and then you can use it to open a row like this:</p>
-<pre><code class="highlight plaintext">{{ row_open( 'div', 'content', 'bg' ) }}
-</code></pre>
-
-<p>The above will have this as a result:</p>
-<pre><code class="highlight html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"g bg"</span> <span class="na">id=</span><span class="s">"content"</span><span class="nt">&gt;</span>
-</code></pre>
-
-<p>In addition, we also have shortcode-like syntax that can be entered wherever you want. The available functions that you can use this way are:</p>
-
-<p><code class="prettyprint">[maera_grid_container_open]</code> - opens a container div<br>
-<code class="prettyprint">[maera_grid_container_close]</code> - closes a container div<br>
-<code class="prettyprint">[maera_grid_container_class]</code> - the class of the container</p>
-
-<p><code class="prettyprint">[maera_grid_row_open]</code> - open a row div<br>
-<code class="prettyprint">[maera_grid_row_close]</code> - closes a row div<br>
-<code class="prettyprint">[maera_grid_row_class]</code> - the class of the row</p>
-
-<p><code class="prettyprint">[maera_grid_col_1]</code> - the column classes for width 1/12<br>
-<code class="prettyprint">[maera_grid_col_2]</code> - the column classes for width 2/12<br>
-<code class="prettyprint">[maera_grid_col_3]</code> - the column classes for width 3/12<br>
-<code class="prettyprint">[maera_grid_col_4]</code> - the column classes for width 4/12<br>
-<code class="prettyprint">[maera_grid_col_5]</code> - the column classes for width 5/12<br>
-<code class="prettyprint">[maera_grid_col_6]</code> - the column classes for width 6/12<br>
-<code class="prettyprint">[maera_grid_col_7]</code> - the column classes for width 7/12<br>
-<code class="prettyprint">[maera_grid_col_8]</code> - the column classes for width 8/12<br>
-<code class="prettyprint">[maera_grid_col_9]</code> - the column classes for width 9/12<br>
-<code class="prettyprint">[maera_grid_col_10]</code> - the column classes for width 10/12<br>
-<code class="prettyprint">[maera_grid_col_11]</code> - the column classes for width 11/12<br>
-<code class="prettyprint">[maera_grid_col_12]</code> - the column classes for width 12/12  </p>
-
-<p><code class="prettyprint">[maera_button_default_extra_small]</code> - classes for default, extra-small buttons<br>
-<code class="prettyprint">[maera_button_default_small]</code> - classes for default, small buttons<br>
-<code class="prettyprint">[maera_button_default_medium]</code> - classes for default, medium buttons<br>
-<code class="prettyprint">[maera_button_default_large]</code> - classes for default, large buttons<br>
-<code class="prettyprint">[maera_button_default_extra_large]</code> - classes for default, extra-large buttons  </p>
-
-<p><code class="prettyprint">[maera_button_primary_extra_small]</code> - classes for primary, extra-small buttons<br>
-<code class="prettyprint">[maera_button_primary_small]</code> - classes for primary, small buttons<br>
-<code class="prettyprint">[maera_button_primary_medium]</code> - classes for primary, medium buttons<br>
-<code class="prettyprint">[maera_button_primary_large]</code> - classes for primary, large buttons<br>
-<code class="prettyprint">[maera_button_primary_extra_large]</code> - classes for primary, extra-large buttons  </p>
-
-<p><code class="prettyprint">[maera_button_success_extra_small]</code> - classes for success, extra-small buttons<br>
-<code class="prettyprint">[maera_button_success_small]</code> - classes for success, small buttons<br>
-<code class="prettyprint">[maera_button_success_medium]</code> - classes for success, medium buttons<br>
-<code class="prettyprint">[maera_button_success_large]</code> - classes for success, large buttons<br>
-<code class="prettyprint">[maera_button_success_extra_large]</code> - classes for success, extra-large buttons  </p>
-
-<p><code class="prettyprint">[maera_button_info_extra_small]</code> - classes for info, extra-small buttons<br>
-<code class="prettyprint">[maera_button_info_small]</code> - classes for info, small buttons<br>
-<code class="prettyprint">[maera_button_info_medium]</code> - classes for info, medium buttons<br>
-<code class="prettyprint">[maera_button_info_large]</code> - classes for info, large buttons<br>
-<code class="prettyprint">[maera_button_info_extra_large]</code> - classes for info, extra-large buttons  </p>
-
-<p><code class="prettyprint">[maera_button_warning_extra_small]</code> - classes for warning, extra small buttons<br>
-<code class="prettyprint">[maera_button_warning_small]</code> - classes for warning, small buttons<br>
-<code class="prettyprint">[maera_button_warning_medium]</code> - classes for warning, medium buttons<br>
-<code class="prettyprint">[maera_button_warning_large]</code> - classes for warning, large buttons<br>
-<code class="prettyprint">[maera_button_warning_extra_large]</code> - classes for warning, extra-large buttons  </p>
-
-<p><code class="prettyprint">[maera_button_danger_extra_small]</code> - classes for danger, extra-small buttons<br>
-<code class="prettyprint">[maera_button_danger_small]</code> - classes for danger, small buttons<br>
-<code class="prettyprint">[maera_button_danger_medium]</code> - classes for danger, medium buttons<br>
-<code class="prettyprint">[maera_button_danger_large]</code> - classes for danger, large buttons<br>
-<code class="prettyprint">[maera_button_danger_extra_large]</code> - classes for danger, extra-large buttons  </p>
-
-<p><code class="prettyprint">[maera_button_link_extra_small]</code> - classes for link, extra-small buttons<br>
-<code class="prettyprint">[maera_button_link_small]</code> - classes for link, small buttons<br>
-<code class="prettyprint">[maera_button_link_medium]</code> - classes for link, medium buttons<br>
-<code class="prettyprint">[maera_button_link_large]</code> - classes for link, large buttons<br>
-<code class="prettyprint">[maera_button_link_extra_large]</code> - classes for link, extra-large buttons  </p>
-
-<p>Example scenario: A row that has a 3-column layout inside. The 1st column is half the width of the page, the 2nd column is a 3rd of the page width and the 3rd column is 1 6th of the page width. The 1st and 2nd columns also have a button in them:  </p>
-<pre><code class="highlight html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"[maera_grid_row_class]"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"[maera_grid_col_6]"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;p&gt;</span>This column has a width of 6/12 (half the page/content)<span class="nt">&lt;/p&gt;</span>
-        <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"[maera_button_success_small]"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>small green button<span class="nt">&lt;/a&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"[maera_grid_col_4]"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;p&gt;</span>This column is 4/12 of the page/content (1 3rd of the width of its parent element)<span class="nt">&lt;/p&gt;</span>
-        <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"[maera_button_danger_large]"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>large red button<span class="nt">&lt;/a&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"[maera_grid_col_2]"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;p&gt;</span>This column is 2/12 of the page/content width. That's too narrow and rarely used<span class="nt">&lt;/p&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span>
-</code></pre>
-
-<p>Though the above example is pretty simplistic, it gives you an idea of how simple it is to implement these in your own templates. The great thing about them is that you can also use them <strong>in your content</strong>, so you can simply use them when using the WordPress content editor. This will allow you to have your content play nicely no matter which shell you&rsquo;re using. So you can be using <a href="http://getbootstrap.com/">Bootstrap</a> now and <a href="http://foundation.zurb.com/">foundation</a> next month, or even <a href="http://purecss.io/">purecss</a> and your content and customisations will look nice wherever you are.</p>
 
           <h1 id='templating'>Templating</h1>
 <p>Maera is a WordPress theme and as such it follows the default WordPress <a href="http://wphierarchy.com/">template hierarchy</a>. However, we do have some extra stuff going on under the hood that we have found make life a lot easier both for skilled developers and for novice users that may not be php developers.</p>
