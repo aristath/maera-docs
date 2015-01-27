@@ -181,6 +181,29 @@ From that point on it&rsquo;s all up to your inspiration!</p>
 <span class="nt">&lt;/div&gt;</span>
 </code></pre>
 
+<blockquote>
+<p>If we were using <a href="http://getbootstrap.com/">Bootstrap 3</a> for example on our shell, the result would look like this:</p>
+</blockquote>
+<pre><code class="highlight html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-xs-12 col-sm-6 col-md-8 col-lg-9"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;p&gt;</span>12 columns on a mobile,<span class="nt">&lt;/p&gt;</span>
+            <span class="nt">&lt;p&gt;</span>6 columns on a tablet<span class="nt">&lt;/p&gt;</span>
+            <span class="nt">&lt;p&gt;</span>8 columns on a normal screen<span class="nt">&lt;/p&gt;</span>
+            <span class="nt">&lt;p&gt;</span>9 columns on large screens<span class="nt">&lt;/p&gt;</span>
+            <span class="nt">&lt;p&gt;</span>The actual implementation depends on the shell.<span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-xs-12 col-sm-6 col-md-4 col-lg-3"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;p&gt;</span>12 columns on a mobile<span class="nt">&lt;/p&gt;</span>
+            <span class="nt">&lt;p&gt;</span>6 columns on a tablet<span class="nt">&lt;/p&gt;</span>
+            <span class="nt">&lt;p&gt;</span>4 columns on a normal screen<span class="nt">&lt;/p&gt;</span>
+            <span class="nt">&lt;p&gt;</span>3 columns on large screens<span class="nt">&lt;/p&gt;</span>
+            <span class="nt">&lt;p&gt;</span>The actual implementation depends on the shell.<span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre>
+
 <p>There are many CSS frameworks out there like for example Bootstrap, Foundation, Pure and lots more. Each one of them defines a grid, buttons, alert messages and a lot of other things using its unique HTML structure, CSS class names etc.</p>
 
 <p>We wanted to have a mechanism that will allow our plugins to be framework-agnostic, so if you write something in a plugin it can work no matter what shell/css-framework you use on your site.</p>
@@ -193,10 +216,6 @@ You can see a list of the default macros in <a href="https://github.com/presscod
 
 <p>On this code snippet we&rsquo;re first creating a container div. In that we&rsquo;re adding a row, and in that row 2 columns. The first column is wider and the second one is narrower. We have the flexibility to define separate width on a per-screen-size basis, or you can only define the medium size and the rest will be automatically filled-in.</p>
 
-<p>If we were using <a href="http://getbootstrap.com/">Bootstrap 3</a> for example on our shell, the result would look like this:</p>
-
-<p><code class="prettyprint">&lt;div class=&quot;container&quot;&gt;&lt;div class=&quot;row&quot;&gt;&lt;div class=&quot;col-xs-12 col-sm-6 col-md-8 col-lg-9&quot;&gt;&lt;p&gt;12 columns on a mobile,&lt;/p&gt;&lt;p&gt;6 columns on a tablet&lt;/p&gt;&lt;p&gt;8 columns on a normal screen&lt;/p&gt;&lt;p&gt;9 columns on large screens&lt;/p&gt;&lt;p&gt;The actual implementation depends on the shell.&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;col-xs-12 col-sm-6 col-md-4 col-lg-3&quot;&gt;&lt;p&gt;12 columns on a mobile&lt;/p&gt;&lt;p&gt;6 columns on a tablet&lt;/p&gt;&lt;p&gt;4 columns on a normal screen&lt;/p&gt;&lt;p&gt;3 columns on large screens&lt;/p&gt;&lt;p&gt;The actual implementation depends on the shell.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</code></p>
-
 <p>If you&rsquo;re building a site for yourself or a client you may not need these, but as a good practice we recommend you do use them so that your site &amp; templates will still work and be properly styled even if you completely change the shell &amp; CSS framework you&rsquo;re using.
 No matter what happens, your templates will always use the proper CSS classes provided by your shell.</p>
 <h2 id='shortcode-macros'>Shortcode Macros</h2><pre><code class="highlight html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"[maera_grid_container_class]"</span><span class="nt">&gt;</span>
@@ -207,6 +226,29 @@ No matter what happens, your templates will always use the proper CSS classes pr
         <span class="nt">&lt;/div&gt;</span>
         <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"[maera_grid_col_4]"</span><span class="nt">&gt;</span>
             <span class="nt">&lt;p&gt;</span>4 columns<span class="nt">&lt;/p&gt;</span>
+            <span class="nt">&lt;p&gt;</span>The actual implementation depends on the shell.<span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre>
+
+<blockquote>
+<p>If we were using <a href="http://getbootstrap.com/">Bootstrap 3</a> for example on our shell, the result would look like this:</p>
+</blockquote>
+<pre><code class="highlight html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-8"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;p&gt;</span>12 columns on a mobile,<span class="nt">&lt;/p&gt;</span>
+            <span class="nt">&lt;p&gt;</span>6 columns on a tablet<span class="nt">&lt;/p&gt;</span>
+            <span class="nt">&lt;p&gt;</span>8 columns on a normal screen<span class="nt">&lt;/p&gt;</span>
+            <span class="nt">&lt;p&gt;</span>9 columns on large screens<span class="nt">&lt;/p&gt;</span>
+            <span class="nt">&lt;p&gt;</span>The actual implementation depends on the shell.<span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-4"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;p&gt;</span>12 columns on a mobile<span class="nt">&lt;/p&gt;</span>
+            <span class="nt">&lt;p&gt;</span>6 columns on a tablet<span class="nt">&lt;/p&gt;</span>
+            <span class="nt">&lt;p&gt;</span>4 columns on a normal screen<span class="nt">&lt;/p&gt;</span>
+            <span class="nt">&lt;p&gt;</span>3 columns on large screens<span class="nt">&lt;/p&gt;</span>
             <span class="nt">&lt;p&gt;</span>The actual implementation depends on the shell.<span class="nt">&lt;/p&gt;</span>
         <span class="nt">&lt;/div&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
@@ -543,8 +585,6 @@ You may want to use this filter to change the width of the container or to appen
 <p>To add your own templates you can create a <a href="href=&quot;http://codex.wordpress.org/Child_Themes">Child Theme</a> and either create custom php template files like you would do on every other WordPress theme, or custom twig templates.
 The template hierarchy of the twig files is the same as the <a href="href=&quot;http://wphierarchy.com/">default WordPress templates structure</a>, simply by replacing the <code class="prettyprint">.php</code> suffix with <code class="prettyprint">.twig</code>.
 You can keep your <code class="prettyprint">.twig</code> files in the root of your child theme, or a <code class="prettyprint">/views</code> folder if you want to keep things a little more organized.</p>
-
-<hr>
 <h2 id='template-hierarchy'>Template hierarchy</h2>
 <p>You can create additional <code class="prettyprint">.twig</code> files in a child them (or a shell) if you need to override the default template for a post, a page, a taxonomy or whatever you want.</p>
 
@@ -703,29 +743,102 @@ You can keep your <code class="prettyprint">.twig</code> files in the root of yo
 You can see the twig file template parts on the below diagram:
 <img alt="Twig Template Parts" src="https://press.codes/wp-content/uploads/template-structure.png" />
 <a href="https://press.codes/wp-content/uploads/template-structure.png">Get this file for a larger view</a></p>
-<h2 id='post-properties-in-twig-files'>Post properties in twig files</h2><pre><code class="highlight html">{{ post.ID }}                 // ID of the post
-{{ post.post_author }}        // ID of the post author
-{{ post.post_date }}          // timestamp in local time
-{{ post.post_date_gmt }}      // timestamp in gmt time
-{{ post.post_content }}       // Full (unprocessed) body of the post
-{{ post.post_title }}         // title of the post
-{{ post.post_excerpt }}       // excerpt field of the post, caption if attachment
-{{ post.post_status }}        // the post status
-{{ post.comment_status }}     // comment status: open, closed
-{{ post.ping_status }}        // ping/trackback status
-{{ post.post_password }}      // password of the post
-{{ post.post_name }}          // post slug, string to use in the URL
-{{ post.post_modified }}      // timestamp in local time
-{{ post.post_modified_gmt }}  // timestatmp in gmt time
-{{ post.post_parent }}        // id of the parent post.
-{{ post.guid }}               // global unique id of the post
-{{ post.menu_order }}         // menu order
-{{ post.post_type }}          // type of post: post, page, attachment, or custom string
-{{ post.post_mime_type }}     // mime type for attachment posts
-{{ post.comment_count }}      // number of comments
-{{ post.terms }}              // taxonomy terms
-{{ post.custom_field }}       // custom fields (replace custom_field with your own)
-</code></pre>
+<h2 id='post-properties-in-twig-files'>Post properties in twig files</h2>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Functionality</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">{{ post.ID }}</code></td>
+<td>ID of the post</td>
+</tr>
+<tr>
+<td><code class="prettyprint">{{ post.post_author }}</code></td>
+<td>ID of the post author</td>
+</tr>
+<tr>
+<td><code class="prettyprint">{{ post.post_date }}</code></td>
+<td>timestamp in local time</td>
+</tr>
+<tr>
+<td><code class="prettyprint">{{ post.post_date_gmt }}</code></td>
+<td>timestamp in gmt time</td>
+</tr>
+<tr>
+<td><code class="prettyprint">{{ post.post_content }}</code></td>
+<td>Full (unprocessed) body of the post</td>
+</tr>
+<tr>
+<td><code class="prettyprint">{{ post.post_title }}</code></td>
+<td>title of the post</td>
+</tr>
+<tr>
+<td><code class="prettyprint">{{ post.post_excerpt }}</code></td>
+<td>excerpt field of the post, caption if attachment</td>
+</tr>
+<tr>
+<td><code class="prettyprint">{{ post.post_status }}</code></td>
+<td>the post status</td>
+</tr>
+<tr>
+<td><code class="prettyprint">{{ post.comment_status }}</code></td>
+<td>comment status: open, closed</td>
+</tr>
+<tr>
+<td><code class="prettyprint">{{ post.ping_status }}</code></td>
+<td>ping/trackback status</td>
+</tr>
+<tr>
+<td><code class="prettyprint">{{ post.post_password }}</code></td>
+<td>password of the post</td>
+</tr>
+<tr>
+<td><code class="prettyprint">{{ post.post_name }}</code></td>
+<td>post slug, string to use in the URL</td>
+</tr>
+<tr>
+<td><code class="prettyprint">{{ post.post_modified }}</code></td>
+<td>timestamp in local time</td>
+</tr>
+<tr>
+<td><code class="prettyprint">{{ post.post_modified_gmt }}</code></td>
+<td>timestatmp in gmt time</td>
+</tr>
+<tr>
+<td><code class="prettyprint">{{ post.post_parent }}</code></td>
+<td>id of the parent post.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">{{ post.guid }}</code></td>
+<td>global unique id of the post</td>
+</tr>
+<tr>
+<td><code class="prettyprint">{{ post.menu_order }}</code></td>
+<td>menu order</td>
+</tr>
+<tr>
+<td><code class="prettyprint">{{ post.post_type }}</code></td>
+<td>type of post: post, page, attachment, or custom string</td>
+</tr>
+<tr>
+<td><code class="prettyprint">{{ post.post_mime_type }}</code></td>
+<td>mime type for attachment posts</td>
+</tr>
+<tr>
+<td><code class="prettyprint">{{ post.comment_count }}</code></td>
+<td>number of comments</td>
+</tr>
+<tr>
+<td><code class="prettyprint">{{ post.terms }}</code></td>
+<td>taxonomy terms</td>
+</tr>
+<tr>
+<td><code class="prettyprint">{{ post.custom_field }}</code></td>
+<td>custom fields (replace custom_field with your own)</td>
+</tr>
+</tbody></table>
 
 <p>You can use post properties, fields and content in your <code class="prettyprint">.twig</code> template files however you want.
 On the right you can see what is available and what it does.</p>
