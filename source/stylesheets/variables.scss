@@ -68,13 +68,15 @@ $phone-width: $tablet-width - $nav-width; // min width before reverting to mobil
 // FONTS
 ////////////////////
 %default-font {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  font-weight: 300;
 }
 
 %header-font {
   @extend %default-font;
-  font-weight: bold;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 700;
 }
 
 %code-font {
