@@ -12,11 +12,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
       <script src="javascripts/all.js" type="text/javascript"></script>
 
-      <script>
-        $(function() {
-          setupLanguages(["php","twig","css","js"]);
-        });
-      </script>
   </head>
 
   <body class="index">
@@ -28,12 +23,6 @@
     </a>
     <div class="tocify-wrapper">
       <a class="logo" href="/"><img src="images/logo.png" /></a>
-        <div class="lang-selector">
-              <a href="#" data-language-name="php">php</a>
-              <a href="#" data-language-name="twig">twig</a>
-              <a href="#" data-language-name="css">css</a>
-              <a href="#" data-language-name="js">js</a>
-        </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
@@ -151,45 +140,45 @@ Author:              me
 
 <p>You can extend that class and create your own methods and functions but the above code is the bare minimum to create and use a new shell.
 From that point on it&rsquo;s all up to your inspiration!</p>
-<h2 id='shell-macros'>Shell Macros</h2><pre><code class="highlight plaintext">{% from 'grid_classes.html.twig' import container as container %}
+<h2 id='shell-macros'>Shell Macros</h2><pre><code class="highlight html">{% from 'grid_classes.html.twig' import container as container %}
 {% from 'grid_classes.html.twig' import row as row %}
 {% from 'column_classes.html.twig' import column_classes as column_classes %}
 
-&lt;div class="{{ container }}"&gt;
-    &lt;div class="{{ row }}"&gt;
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"{{ container }}"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"{{ row }}"</span><span class="nt">&gt;</span>
 
-        &lt;div class="{{ column_classes(
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"{{ column_classes(
             [
                 {'mobile':12},
                 {'tablet':6},
                 {'medium':8},
                 {'large':9}
             ]
-        ) }}"&gt;
-            &lt;p&gt;12 columns on a mobile,&lt;/p&gt;
-            &lt;p&gt;6 columns on a tablet&lt;/p&gt;
-            &lt;p&gt;8 columns on a normal screen&lt;/p&gt;
-            &lt;p&gt;9 columns on large screens&lt;/p&gt;
+        ) }}"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;p&gt;</span>12 columns on a mobile,<span class="nt">&lt;/p&gt;</span>
+            <span class="nt">&lt;p&gt;</span>6 columns on a tablet<span class="nt">&lt;/p&gt;</span>
+            <span class="nt">&lt;p&gt;</span>8 columns on a normal screen<span class="nt">&lt;/p&gt;</span>
+            <span class="nt">&lt;p&gt;</span>9 columns on large screens<span class="nt">&lt;/p&gt;</span>
 
-            &lt;p&gt;The actual implementation depends on the shell.&lt;/p&gt;
-        &lt;/div&gt;
-        &lt;div class="{{ column_classes(
+            <span class="nt">&lt;p&gt;</span>The actual implementation depends on the shell.<span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"{{ column_classes(
             [
                 {'mobile':12},
                 {'tablet':6},
                 {'medium':4},
                 {'large':3}
             ]
-        ) }}"&gt;
-            &lt;p&gt;12 columns on a mobile&lt;/p&gt;
-            &lt;p&gt;6 columns on a tablet&lt;/p&gt;
-            &lt;p&gt;4 columns on a normal screen&lt;/p&gt;
-            &lt;p&gt;3 columns on large screens&lt;/p&gt;
+        ) }}"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;p&gt;</span>12 columns on a mobile<span class="nt">&lt;/p&gt;</span>
+            <span class="nt">&lt;p&gt;</span>6 columns on a tablet<span class="nt">&lt;/p&gt;</span>
+            <span class="nt">&lt;p&gt;</span>4 columns on a normal screen<span class="nt">&lt;/p&gt;</span>
+            <span class="nt">&lt;p&gt;</span>3 columns on large screens<span class="nt">&lt;/p&gt;</span>
 
-            &lt;p&gt;The actual implementation depends on the shell.&lt;/p&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
+            <span class="nt">&lt;p&gt;</span>The actual implementation depends on the shell.<span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
 </code></pre>
 
 <p>There are many CSS frameworks out there like for example Bootstrap, Foundation, Pure and lots more. Each one of them defines a grid, buttons, alert messages and a lot of other things using its unique HTML structure, CSS class names etc.</p>
@@ -714,7 +703,7 @@ You can keep your <code class="prettyprint">.twig</code> files in the root of yo
 You can see the twig file template parts on the below diagram:
 <img alt="Twig Template Parts" src="https://press.codes/wp-content/uploads/template-structure.png" />
 <a href="https://press.codes/wp-content/uploads/template-structure.png">Get this file for a larger view</a></p>
-<h2 id='post-properties-in-twig-files'>Post properties in twig files</h2><pre><code class="highlight plaintext">{{ post.ID }}                 // ID of the post
+<h2 id='post-properties-in-twig-files'>Post properties in twig files</h2><pre><code class="highlight html">{{ post.ID }}                 // ID of the post
 {{ post.post_author }}        // ID of the post author
 {{ post.post_date }}          // timestamp in local time
 {{ post.post_date_gmt }}      // timestamp in gmt time
@@ -743,12 +732,6 @@ On the right you can see what is available and what it does.</p>
 
       </div>
       <div class="dark-box">
-          <div class="lang-selector">
-                <a href="#" data-language-name="php">php</a>
-                <a href="#" data-language-name="twig">twig</a>
-                <a href="#" data-language-name="css">css</a>
-                <a href="#" data-language-name="js">js</a>
-          </div>
       </div>
     </div>
   </body>
