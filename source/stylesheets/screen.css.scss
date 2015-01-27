@@ -89,13 +89,6 @@ html, body {
     }
   }
 
-  // This is the logo at the top of the ToC
-  &>img {
-    display: block;
-    max-width: 96%;
-    padding: 20px 2%;
-  }
-
   &>.search {
     position: relative;
 
@@ -631,4 +624,15 @@ html, body {
   %right-col + %left-col {
     margin-top: $main-padding;
   }
+}
+
+a.logo {
+    max-width: 100%;
+    display: block;
+
+    img {
+        display: block;
+        max-width: 96%;
+        padding: 20px 2%;
+    }
 }
