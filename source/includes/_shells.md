@@ -102,7 +102,7 @@ From that point on it's all up to your inspiration!
 
 ## Shell Macros
 
-```twig
+```html
 {% from 'grid_classes.html.twig' import container as container %}
 {% from 'grid_classes.html.twig' import row as row %}
 {% from 'column_classes.html.twig' import column_classes as column_classes %}

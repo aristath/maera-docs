@@ -185,7 +185,7 @@ You can see the twig file template parts on the below diagram:
 
 ## Post properties in twig files
 
-```twig
+```html
 {{ post.ID }}                 // ID of the post
 {{ post.post_author }}        // ID of the post author
 {{ post.post_date }}          // timestamp in local time
