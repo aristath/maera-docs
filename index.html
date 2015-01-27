@@ -333,12 +333,7 @@ An example usage is when we import the customizer options in a shell that uses a
 <p>This filter will add items to the Admin Theme Options page.</p>
 
 <p>You may want to use this filter to add aditional options. However, theme specific customization options should use the customizer and not the options page.</p>
-<h2 id='maeracontainer_class'>maera/container_class</h2>
-<p>This filter will change or add the class to the main container.
-You may want to use this filter to change the width of the container or to append a certain CSS class.</p>
-
-<p>Example:</p>
-<pre><code class="highlight php"><span class="cp">&lt;?php</span>
+<h2 id='maeracontainer_class'>maera/container_class</h2><pre><code class="highlight php"><span class="cp">&lt;?php</span>
 <span class="k">function</span> <span class="nf">my_container_class</span><span class="p">()</span> <span class="p">{</span>
 
     <span class="nv">$class_setting</span> <span class="o">=</span> <span class="nx">get_theme_mod</span><span class="p">(</span> <span class="s1">'my_theme_mod'</span><span class="p">,</span><span class="mi">1</span> <span class="p">);</span>
@@ -357,11 +352,10 @@ You may want to use this filter to change the width of the container or to appen
 <span class="nx">add_filter</span><span class="p">(</span> <span class="s1">'maera/container_class'</span><span class="p">,</span> <span class="s1">'maera_container_class'</span> <span class="p">);</span>
 <span class="cp">?&gt;</span>
 </code></pre>
-<h2 id='maeracontent_width'>maera/content_width</h2>
-<p>You may want to use this filter to change the default width of the container.</p>
 
-<p>Example:</p>
-<pre><code class="highlight php"><span class="cp">&lt;?php</span>
+<p>This filter will change or add the class to the main container.
+You may want to use this filter to change the width of the container or to append a certain CSS class.</p>
+<h2 id='maeracontent_width'>maera/content_width</h2><pre><code class="highlight php"><span class="cp">&lt;?php</span>
 <span class="k">function</span> <span class="nf">my_content_width</span><span class="p">()</span> <span class="p">{</span>
 
     <span class="k">if</span> <span class="p">(</span> <span class="o">!</span> <span class="nb">isset</span><span class="p">(</span> <span class="nv">$content_width</span> <span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
@@ -374,48 +368,48 @@ You may want to use this filter to change the width of the container or to appen
 <span class="nx">add_filter</span><span class="p">(</span> <span class="s1">'maera/content_width'</span><span class="p">,</span> <span class="s1">'maera_'</span> <span class="p">);</span>
 <span class="cp">?&gt;</span>
 </code></pre>
-<h2 id='maeraimageheight'>maera/image/height</h2>
-<p>You may want to use this filter to change the height of featured images. This may be useful when creating fluid, concise layouts.</p>
 
-<p>Example: Set the height of featured images to 200px</p>
-<pre><code class="highlight php"><span class="cp">&lt;?php</span>
-<span class="k">function</span> <span class="nf">my_featured_images_height</span><span class="p">()</span> <span class="p">{</span>
+<p>You may want to use this filter to change the default width of the container.</p>
+
+<p>The content_width can be used in your <code class="prettyprint">twig</code> files using <code class="prettyprint">{{ content_width }}</code> and in some shells we use it to calculate for example the width of featured images.</p>
+<h2 id='maeraimageheight'>maera/image/height</h2><pre><code class="highlight php"><span class="cp">&lt;?php</span>
+<span class="c1">// Set the height of featured images to 200px
+</span><span class="k">function</span> <span class="nf">my_featured_images_height</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="mi">200</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nx">add_action</span><span class="p">(</span> <span class="s1">'maera/image/height'</span><span class="p">,</span> <span class="s1">'my_featured_images_height'</span> <span class="p">);</span>
 <span class="cp">?&gt;</span>
 </code></pre>
-<h2 id='maeraimagewidth'>maera/image/width</h2>
-<p>You may want to use this filter to change the width of featured images. This may be useful when creating fluid, concise layouts.</p>
 
-<p>Example: Set the width of featured images to 450px</p>
-<pre><code class="highlight php"><span class="cp">&lt;?php</span>
-<span class="k">function</span> <span class="nf">my_featured_images_width</span><span class="p">()</span> <span class="p">{</span>
+<p>You may want to use this filter to change the height of featured images. This may be useful when creating fluid, concise layouts.</p>
+<h2 id='maeraimagewidth'>maera/image/width</h2><pre><code class="highlight php"><span class="cp">&lt;?php</span>
+
+<span class="c1">// Set the width of featured images to 450px
+</span><span class="k">function</span> <span class="nf">my_featured_images_width</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="mi">450</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nx">add_action</span><span class="p">(</span> <span class="s1">'maera/image/height'</span><span class="p">,</span> <span class="s1">'my_featured_images_width'</span> <span class="p">);</span>
+
 <span class="cp">?&gt;</span>
 </code></pre>
-<h2 id='maerasection_classprimary'>maera/section_class/primary</h2>
-<p>Allows you to add classes to the primary sidebar.</p>
 
-<p>Example:</p>
-<pre><code class="highlight php"><span class="cp">&lt;?php</span>
+<p>You may want to use this filter to change the width of featured images. This may be useful when creating fluid, concise layouts.</p>
+<h2 id='maerasection_classprimary'>maera/section_class/primary</h2><pre><code class="highlight php"><span class="cp">&lt;?php</span>
+
 <span class="k">function</span> <span class="nf">my_sidebar_primary_classes</span><span class="p">(</span> <span class="nv">$class</span> <span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nv">$class</span> <span class="o">.</span> <span class="s1">' primary col-sm-6 col-md-4 col-lg-3'</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nx">add_action</span><span class="p">(</span> <span class="s1">'maera/section_class/primary'</span><span class="p">,</span> <span class="s1">'my_sidebar_primary_classes'</span> <span class="p">);</span>
+
 <span class="cp">?&gt;</span>
 </code></pre>
+
+<p>Allows you to add classes to the primary sidebar.</p>
 <h2 id='maerasection_classsecondary'>maera/section_class/secondary</h2>
 <p>Allows you to add classes to the secondary sidebar. Usage is exactly the same as the <a href="#maerasection_classprimary">maera/section_class/primary</a> action.</p>
 <h2 id='maerasection_classwrapper'>maera/section_class/wrapper</h2>
 <p>Allows you to add classes to a wrapper div that includes the content area and the primary sidebar. Particularty useful if you&rsquo;re trying to achieve a template that has 3 columns and you need to float the content and sidebar to the right. Usage is exactly the same as the <a href="#maerasection_classprimary">maera/section_class/primary</a> action.</p>
-<h2 id='maerashellsavailable'>maera/shells/available</h2>
-<p>You can use this filter to add your own shell in the list of available shells so that users can select and activate it.</p>
-
-<p>Usage:</p>
-<pre><code class="highlight php"><span class="cp">&lt;?php</span>
+<h2 id='maerashellsavailable'>maera/shells/available</h2><pre><code class="highlight php"><span class="cp">&lt;?php</span>
 
 <span class="sd">/**
  * Include the shell
@@ -437,12 +431,10 @@ You may want to use this filter to change the width of the container or to appen
 <span class="cp">?&gt;</span>
 </code></pre>
 
-<p>More info can be found on the [[Defining a shell]] page.</p>
-<h2 id='maerastyles'>maera/styles</h2>
-<p>If you need to add some custom CSS to your page, you can use this filter.</p>
+<p>You can use this filter to add your own shell in the list of available shells so that users can select and activate it.</p>
 
-<p>Usage:</p>
-<pre><code class="highlight php"><span class="cp">&lt;?php</span>
+<p>More info can be found on the <a href="#building-a-shell">Building a Shell</a> page.</p>
+<h2 id='maerastyles'>maera/styles</h2><pre><code class="highlight php"><span class="cp">&lt;?php</span>
 <span class="k">function</span> <span class="nf">custom_header_css</span><span class="p">(</span> <span class="nv">$styles</span> <span class="p">)</span> <span class="p">{</span>
 
     <span class="nv">$image_url</span> <span class="o">=</span> <span class="nx">get_header_image</span><span class="p">();</span>
@@ -462,11 +454,9 @@ You may want to use this filter to change the width of the container or to appen
 
 <span class="cp">?&gt;</span>
 </code></pre>
-<h2 id='maerastylesheeturl'>maera/stylesheet/url</h2>
-<p>Changes the URL of the stylesheet to be loaded. You can use that if you&rsquo;re building your own shell to replace the default, empty stylesheet with your own.</p>
 
-<p>Usage:</p>
-<pre><code class="highlight php"><span class="cp">&lt;?php</span>
+<p>If you need to add some custom CSS to your page, you can use this filter.</p>
+<h2 id='maerastylesheeturl'>maera/stylesheet/url</h2><pre><code class="highlight php"><span class="cp">&lt;?php</span>
 
 <span class="k">function</span> <span class="nf">my_stylesheet_url</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">get_stylesheet_directory_uri</span><span class="p">()</span> <span class="o">.</span> <span class="s1">'/assets/style.css'</span><span class="p">;</span>
@@ -474,11 +464,9 @@ You may want to use this filter to change the width of the container or to appen
 <span class="nx">add_filter</span><span class="p">(</span> <span class="s1">'maera/stylesheet/url'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span> <span class="nv">$this</span><span class="p">,</span> <span class="s1">'my_stylesheet_url'</span> <span class="p">)</span> <span class="p">);</span>
 <span class="cp">?&gt;</span>
 </code></pre>
-<h2 id='maerastylesheetver'>maera/stylesheet/ver</h2>
-<p>Changes the version of the stylesheet for cache custing.</p>
 
-<p>Usage:</p>
-<pre><code class="highlight php"><span class="cp">&lt;?php</span>
+<p>Changes the URL of the stylesheet to be loaded. You can use that if you&rsquo;re building your own shell to replace the default, empty stylesheet with your own.</p>
+<h2 id='maerastylesheetver'>maera/stylesheet/ver</h2><pre><code class="highlight php"><span class="cp">&lt;?php</span>
 
 <span class="sd">/**
  * Get the file modification time of our stylesheet
@@ -490,6 +478,8 @@ You may want to use this filter to change the width of the container or to appen
 <span class="nx">add_filter</span><span class="p">(</span> <span class="s1">'maera/stylesheet/ver'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span> <span class="nv">$this</span><span class="p">,</span> <span class="s1">'my_stylesheet_version'</span> <span class="p">)</span> <span class="p">);</span>
 <span class="cp">?&gt;</span>
 </code></pre>
+
+<p>Changes the version of the stylesheet for cache custing.</p>
 <h2 id='other-filters-to-be-documented'>Other filters (to be documented):</h2>
 <ul>
 <li>maera/sidebar/footer</li>
@@ -532,84 +522,158 @@ The template hierarchy of the twig files is the same as the <a href="href=&quot;
 You can keep your <code class="prettyprint">.twig</code> files in the root of your child theme, or a <code class="prettyprint">/views</code> folder if you want to keep things a little more organized.</p>
 
 <hr>
-<h2 id='template-hierarchy-on-the-maera-theme'>Template hierarchy on the Maera theme:</h2>
+<h2 id='template-hierarchy'>Template hierarchy</h2>
+<p>You can create additional <code class="prettyprint">.twig</code> files in a child them (or a shell) if you need to override the default template for a post, a page, a taxonomy or whatever you want.</p>
+
+<p>On the table below you can see the template hierarchy used by Maera for <code class="prettyprint">.twig</code> template files.</p>
+
 <table>
-<th>
-<td>Content Template</td>
-<td>Sidebar Template</td>
-</th>
-<tr>
-<th>Author Archives</th>
-<td>
-author-{nicename}.twig, author-{ID}.twig, author.twig, archive.twig, index.twig
-</td>
-<td>
-sidebar.twig
-</td>
-</tr>
-<tr>
-<th>Category Archives</th>
-<td>
-category-{slug}.twig, category-{ID}.twig, category.twig, archive.twig, index.twig
-</td>
-<td>
-sidebar-category-{term_id}.twig, sidebar-category.twig, sidebar.twig
-</td>
-</tr>
-<tr>
-<th>Custom Post Type Archives</th>
-<td>
-archive-{post_type}.twig, archive.twig, index.twig
-</td>
-<td>
-sidebar-archive-{post_type}.twig, sidebar.twig
-</td>
-</tr>
-<tr>
-<th>Custom Taxonomy Archives</th>
-<td>
-taxonomy-{term}.twig, taxonomy-{taxonomy}.twig, archive.twig, index.twig
-</td>
-<td>
-sidebar-term-{term_id}.twig, sidebar-taxonomy-{taxonomy}.twig, sidebar-taxonomy.twig, sidebar.twig
-</td>
-</tr>
-<tr>
-<th>Date Archives</th>
-<td>
-date.twig, archive.twig, index.twig
-</td>
-<td>
-sidebar-date.twig, sidebar.twig
-</td>
-</tr>
-<tr>
-<th>Tag Archives</th>
-<td>
-tag-{slug}.twig, tag-{ID}.twig, tag.twig, archive.twig, index.twig
-</td>
-<td>
-sidebar-tag-{term_id}.twig, sidebar-tag.twig, sidebar.twig
-</td>
-</tr>
-<tr>
-<th>Single Post</th>
-<td>
-single-post.twig, single.twig, index.twig
-</td>
-<td>
-sidebar-{post-ID}.twig, sidebar-post.twig, sidebar-single.twig, sidebar.twig
-</td>
-</tr>
-<tr>
-<th>Single Page</th>
-<td>
-page-{slug}.twig, page-{ID}.twig, page.twig, index.twig
-</td>
-<td>
-sidebar-{post-ID}.twig, sidebar-page.twig, sidebar-single.twig, sidebar.twig
-</td>
-</tr>
+    <th>
+        <td>Content Template</td>
+    </th>
+    <tr>
+        <th>Author Archives</th>
+        <td>
+            <p>author-{nicename}.twig</p>
+            <p>author-{ID}.twig</p>
+            <p>author.twig</p>
+            <p>archive.twig</p>
+            <p>index.twig</p>
+        </td>
+    </tr>
+    <tr>
+        <th>Category Archives</th>
+        <td>
+            <p>category-{slug}.twig</p>
+            <p>category-{ID}.twig</p>
+            <p>category.twig</p>
+            <p>archive.twig</p>
+            <p>index.twig</p>
+        </td>
+    </tr>
+    <tr>
+        <th>Custom Post Type Archives</th>
+        <td>
+            <p>archive-{post_type}.twig</p>
+            <p>archive.twig</p>
+            <p>index.twig</p>
+        </td>
+    </tr>
+    <tr>
+        <th>Custom Taxonomy Archives</th>
+        <td>
+            <p>taxonomy-{term}.twig</p>
+            <p>taxonomy-{taxonomy}.twig</p>
+            <p>archive.twig</p>
+            <p>index.twig</p>
+        </td>
+    </tr>
+    <tr>
+        <th>Date Archives</th>
+        <td>
+            <p>date.twig</p>
+            <p>archive.twig</p>
+            <p>index.twig</p>
+        </td>
+    </tr>
+    <tr>
+        <th>Tag Archives</th>
+            <td>
+                <p>tag-{slug}.twig</p>
+                <p>tag-{ID}.twig</p>
+                <p>tag.twig</p>
+                <p>archive.twig</p>
+                <p>index.twig</p>
+            </td>
+    </tr>
+    <tr>
+        <th>Single Post</th>
+        <td>
+            <p>single-post.twig</p>
+            <p>single.twig</p>
+            <p>index.twig</p>
+        </td>
+    </tr>
+    <tr>
+        <th>Single Page</th>
+        <td>
+            <p>page-{slug}.twig</p>
+            <p>page-{ID}.twig</p>
+            <p>page.twig</p>
+            <p>index.twig</p>
+        </td>
+    </tr>
+</table>
+<h2 id='sidebar-template-hierarchy'>Sidebar Template Hierarchy</h2>
+<p>If you want to override the sidebar for a category or a page, you can do so easily by using a custom <code class="prettyprint">.twig</code> template file for your sidebar.</p>
+
+<p>You can use the table below to see what file-name you will have to use to achieve the results you&rsquo;re after.</p>
+
+<table>
+    <th><td>Sidebar Template</td></th>
+    <tr>
+        <th>Author Archives</th>
+        <td>
+            <p>sidebar.twig</p>
+        </td>
+    </tr>
+    <tr>
+        <th>Category Archives</th>
+    <td>
+        <p>sidebar-category-{term_id}.twig</p>
+        <p>sidebar-category.twig</p>
+        <p>sidebar.twig</p>
+    </td>
+    </tr>
+    <tr>
+        <th>Custom Post Type Archives</th>
+        <td>
+        <p>sidebar-archive-{post_type}.twig</p>
+        <p>sidebar.twig</p>
+        </td>
+    </tr>
+    <tr>
+        <th>Custom Taxonomy Archives</th>
+        <td>
+            <p>sidebar-term-{term_id}.twig</p>
+            <p>sidebar-taxonomy-{taxonomy}.twig</p>
+            <p>sidebar-taxonomy.twig</p>
+            <p>sidebar.twig</p>
+        </td>
+    </tr>
+    <tr>
+        <th>Date Archives</th>
+        <td>
+            <p>sidebar-date.twig</p>
+            <p>sidebar.twig</p>
+        </td>
+    </tr>
+    <tr>
+        <th>Tag Archives</th>
+        <td>
+            <p>sidebar-tag-{term_id}.twig</p>
+            <p>sidebar-tag.twig</p>
+            <p>sidebar.twig</p>
+        </td>
+    </tr>
+    <tr>
+        <th>Single Post</th>
+        <td>
+            <p>sidebar-{post-ID}.twig</p>
+            <p>sidebar-post.twig</p>
+            <p>sidebar-single.twig</p>
+            <p>sidebar.twig</p>
+        </td>
+    </tr>
+    <tr>
+        <th>Single Page</th>
+        <td>
+            <p>sidebar-{post-ID}.twig</p>
+            <p>sidebar-page.twig</p>
+            <p>sidebar-single.twig</p>
+            <p>sidebar.twig</p>
+        </td>
+    </tr>
 </table>
 <h2 id='the-stucture-of-a-rendered-page'>The stucture of a rendered page</h2>
 <p>We divided the pages in sub-files in ordet to make them more modular.
@@ -623,7 +687,7 @@ You can see the twig file template parts on the below diagram:
 {{ post.post_content }}       // Full (unprocessed) body of the post
 {{ post.post_title }}         // title of the post
 {{ post.post_excerpt }}       // excerpt field of the post, caption if attachment
-{{ post.post_status }}        // post status: publish, new, pending, draft, auto-draft, future, private, inherit, trash
+{{ post.post_status }}        // the post status
 {{ post.comment_status }}     // comment status: open, closed
 {{ post.ping_status }}        // ping/trackback status
 {{ post.post_password }}      // password of the post
@@ -637,8 +701,11 @@ You can see the twig file template parts on the below diagram:
 {{ post.post_mime_type }}     // mime type for attachment posts
 {{ post.comment_count }}      // number of comments
 {{ post.terms }}              // taxonomy terms
-{{ post.custom_field }}       // whatever custom field you've added (in the post_meta table)
+{{ post.custom_field }}       // custom fields (replace custom_field with your own)
 </code></pre>
+
+<p>You can use post properties, fields and content in your <code class="prettyprint">.twig</code> template files however you want.
+On the right you can see what is available and what it does.</p>
 
       </div>
       <div class="dark-box">
