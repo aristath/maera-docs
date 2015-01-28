@@ -616,13 +616,13 @@ You can keep your <code class="prettyprint">.twig</code> files in the root of yo
 <pre><code class="highlight php"><span class="cp">&lt;?php</span>
 
 <span class="c1">// Get the global context
-</span><span class="nv">$context</span> <span class="o">=</span> <span class="nx">Maera</span><span class="o">-&gt;</span><span class="na">template</span><span class="o">-&gt;</span><span class="na">context</span><span class="p">();</span>
+</span><span class="nv">$context</span> <span class="o">=</span> <span class="nx">Maera</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">template</span><span class="o">-&gt;</span><span class="na">context</span><span class="p">();</span>
 <span class="c1">// Add our custom context
 // We'll be able to call it in our twigs
 // using {{ my_text }}
 </span><span class="nv">$context</span><span class="p">[</span><span class="s1">'my_text'</span><span class="p">]</span> <span class="o">=</span> <span class="nx">__</span><span class="p">(</span> <span class="s1">'This is some custom context.'</span> <span class="p">);</span>
 <span class="c1">// Render the filename.twig file and include our context
-</span><span class="nx">Maera</span><span class="o">-&gt;</span><span class="na">template</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span> <span class="s1">'filename.twig'</span><span class="p">,</span> <span class="nv">$context</span> <span class="p">);</span>
+</span><span class="nx">Maera</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">template</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span> <span class="s1">'filename.twig'</span><span class="p">,</span> <span class="nv">$context</span> <span class="p">);</span>
 
 <span class="cp">?&gt;</span>
 
