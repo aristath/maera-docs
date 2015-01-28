@@ -31,13 +31,13 @@ You can keep your `.twig` files in the root of your child theme, or a `/views` f
 <?php
 
 // Get the global context
-$context = Maera->template->context();
+$context = Maera()->template->context();
 // Add our custom context
 // We'll be able to call it in our twigs
 // using {{ my_text }}
 $context['my_text'] = __( 'This is some custom context.' );
 // Render the filename.twig file and include our context
-Maera->template->render( 'filename.twig', $context );
+Maera()->template->render( 'filename.twig', $context );
 
 ?>
 
