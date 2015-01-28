@@ -638,3 +638,29 @@ a.logo {
 }
 
 table { font-size: 14px; }
+
+a, a:hover, a:visited {
+    color: #78909c;
+    font-weight: 400;
+    text-decoration: none;
+}
+
+#toc {
+    a, a:hover, a:visited {
+        color: #fff;
+    }
+}
+
+#addons-grid {
+    width: 50%;
+    a {
+        width: 48%;
+        padding: 1%;
+        display: block;
+        float: left;
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    }
+}

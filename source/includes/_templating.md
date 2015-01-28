@@ -17,6 +17,67 @@ To add your own templates you can create a [Child Theme](href="http://codex.word
 The template hierarchy of the twig files is the same as the [default WordPress templates structure](href="http://wphierarchy.com/), simply by replacing the `.php` suffix with `.twig`.
 You can keep your `.twig` files in the root of your child theme, or a `/views` folder if you want to keep things a little more organized.
 
+## Rendering a twig file
+
+> Rendering a twig file from a PHP template
+
+```php
+<?php Maera()->template->render( 'filename.twig' ); ?>
+```
+
+> adding custom context:
+
+```php
+<?php
+
+// Get the global context
+$context = Maera->template->context();
+// Add our custom context
+// We'll be able to call it in our twigs
+// using {{ my_text }}
+$context['my_text'] = __( 'This is some custom context.' );
+// Render the filename.twig file and include our context
+Maera->template->render( 'filename.twig', $context );
+
+?>
+
+```
+
+If you want to render a `.twig` file and call it from a PHP template, you can use the `render` method.
+
+Using `Maera()->template->render()` you can render your twig files and pass your own context to them. If no filename is defined then the theme will automatically choose the appropriate file from its [template hierarchy](#template-hierarchy).
+
+When you use this method, any caching you've set on your admin settings will be automatically applied.
+
+## Calling the theme header
+
+> Call the header.php file
+
+```php
+<?php Maera()->template->header(); ?>
+```
+
+In normal WordPress themes you have to call the [`get_header()`](http://codex.wordpress.org/Function_Reference/get_header) function to call your theme's header. This loads the header.php file and its content.
+In Maera, you can do the same using `Maera()->template->header();`.
+
+Though you could simply use `get_header()`, using the above method will ensure your custom templates are ready for the future.
+
+Right now our method simply calls `get_header()`, but we don't know what the future holds for us so if there are any improvements or customizations in the future, this will ensure you'll take advantage of them.
+
+## Calling the theme footer
+
+> Call the footer.php file
+
+```php
+<?php Maera()->template->footer(); ?>
+```
+
+In normal WordPress themes you have to call the [`get_footer()`](http://codex.wordpress.org/Function_Reference/get_footer) function to call your theme's footer. This loads the footer.php file and its content.
+In Maera, you can do the same using `Maera()->template->footer();`.
+
+Though you could simply use `get_footer()`, using the above method will ensure your custom templates are ready for the future.
+
+Right now our method simply calls `get_header()`, but we don't know what the future holds for us so if there are any improvements or customizations in the future, this will ensure you'll take advantage of them.
 
 ## Template hierarchy
 
@@ -182,32 +243,14 @@ You can see the twig file template parts on the below diagram:
 ![Twig Template Parts](https://press.codes/wp-content/uploads/template-structure.png)
 [Get this file for a larger view](https://press.codes/wp-content/uploads/template-structure.png)
 
-## Post properties in twig files
+## Timber
 
-Property | Functionality
--------- | -------------
-`{{ post.ID }}`                 | ID of the post
-`{{ post.post_author }}`        | ID of the post author
-`{{ post.post_date }}`          | timestamp in local time
-`{{ post.post_date_gmt }}`      | timestamp in gmt time
-`{{ post.post_content }}`       | Full (unprocessed) body of the post
-`{{ post.post_title }}`         | title of the post
-`{{ post.post_excerpt }}`       | excerpt field of the post, caption if attachment
-`{{ post.post_status }}`        | the post status
-`{{ post.comment_status }}`     | comment status: open, closed
-`{{ post.ping_status }}`        | ping/trackback status
-`{{ post.post_password }}`      | password of the post
-`{{ post.post_name }}`          | post slug, string to use in the URL
-`{{ post.post_modified }}`      | timestamp in local time
-`{{ post.post_modified_gmt }}`  | timestatmp in gmt time
-`{{ post.post_parent }}`        | id of the parent post.
-`{{ post.guid }}`               | global unique id of the post
-`{{ post.menu_order }}`         | menu order
-`{{ post.post_type }}`          | type of post: post, page, attachment, or custom string
-`{{ post.post_mime_type }}`     | mime type for attachment posts
-`{{ post.comment_count }}`      | number of comments
-`{{ post.terms }}`              | taxonomy terms
-`{{ post.custom_field }}`       | custom fields (replace custom_field with your own)
+We use the [Timber](http://wordpress.org/timber-library) plugin to process the twig files, so you can use any of its classes and definitions in your template files.
 
-You can use post properties, fields and content in your `.twig` template files however you want.
-On the right you can see what is available and what it does.
+* [Menus](https://github.com/jarednova/timber/wiki/TimberMenu)
+* [Posts](https://github.com/jarednova/timber/wiki/TimberPost)
+* [Images](https://github.com/jarednova/timber/wiki/TimberImage)
+* [Site](https://github.com/jarednova/timber/wiki/TimberSite)
+* [Terms](https://github.com/jarednova/timber/wiki/TimberTerm)
+* [Users](https://github.com/jarednova/timber/wiki/TimberUser)
+* [Filters](https://github.com/jarednova/timber/wiki/Filters)
