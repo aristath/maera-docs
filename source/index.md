@@ -2,7 +2,10 @@
 title: Documentation
 
 toc_footers:
-  - <a href='https://press.codes/checkout?edd_action=add_to_cart&download_id=657809'>Get the theme</a>
+  - <a href="https://press.codes/checkout?edd_action=add_to_cart&download_id=657809">Get the theme</a>
+  - <a href="https://github.com/jarednova/timber/wiki">Timber Wiki</a>
+  - <a href="http://twig.sensiolabs.org/doc/templates.html">Twig for template designers</a>
+  - <a href="http://kirki.org">Kirki Customizer Documentation</a>
 
 includes:
   - shells
