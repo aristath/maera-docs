@@ -37,7 +37,7 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p><strong>Maera</strong> is a developer-friendly theme that allows you to quickly prototype sites and extend it with your own custom plugins.</p>
+<p><strong>Maera</strong> is a developer-friendly WordPress theme that allows you to quickly prototype sites and extend it with your own custom plugins.</p>
 
 <p><strong>It&rsquo;s a kick-ass open-minded theming framework.</strong></p>
 
@@ -45,6 +45,16 @@
 In its heart it uses the <a href="http://twig.sensiolabs.org/">twig templating engine</a> and the WordPress Customizer.</p>
 
 <p>With Maera we&rsquo;re introducing the concept of theme <strong>shells</strong>.  An easy way to completely customize the theme with your own markup, css, scripts and functionality to meet your own needs!</p>
+<h3 id='extending-the-framework'>Extending the framework</h3>
+<p>If you want to extend the Maera Framework you can write your own shells and/or child themes, or you can use one of our premium extensions.</p>
+
+<div id="addons-grid">
+    <a href="https://press.codes/downloads/maera-material-design-shell/"><img src="https://press.codes/wp-content/uploads/edd/material.png"></a>
+    <a href="https://press.codes/downloads/maera-bootstrap-shell/"><img src="https://press.codes/wp-content/uploads/edd/bootstrap.png"></a>
+    <a href="https://press.codes/downloads/maera-foundation-shell/"><img src="https://press.codes/wp-content/uploads/edd/foundation.png"></a>
+    <a href="https://press.codes/downloads/maera-edd/"><img src="https://press.codes/wp-content/uploads/edd/edd.png"></a>
+    <a href="https://press.codes/downloads/maera-woocommerce/"><img src="https://press.codes/wp-content/uploads/edd/woo.png"></a>
+</div>
 
           <h1 id='shells'>Shells</h1><h2 id='what-shells-are'>What Shells are</h2>
 <p>Shells can be built as plugins and allow you to completely custom-code your own theme, overriding the default templates of the theme as well as its stylesheets and other scripts.</p>
@@ -585,6 +595,62 @@ You may want to use this filter to change the width of the container or to appen
 <p>To add your own templates you can create a <a href="href=&quot;http://codex.wordpress.org/Child_Themes">Child Theme</a> and either create custom php template files like you would do on every other WordPress theme, or custom twig templates.
 The template hierarchy of the twig files is the same as the <a href="href=&quot;http://wphierarchy.com/">default WordPress templates structure</a>, simply by replacing the <code class="prettyprint">.php</code> suffix with <code class="prettyprint">.twig</code>.
 You can keep your <code class="prettyprint">.twig</code> files in the root of your child theme, or a <code class="prettyprint">/views</code> folder if you want to keep things a little more organized.</p>
+<h2 id='rendering-a-twig-file'>Rendering a twig file</h2>
+<blockquote>
+<p>Rendering a twig file from a PHP template</p>
+</blockquote>
+<pre><code class="highlight php"><span class="cp">&lt;?php</span> <span class="nx">Maera</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">template</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span> <span class="s1">'filename.twig'</span> <span class="p">);</span> <span class="cp">?&gt;</span>
+</code></pre>
+
+<blockquote>
+<p>adding custom context:</p>
+</blockquote>
+<pre><code class="highlight php"><span class="cp">&lt;?php</span>
+
+<span class="c1">// Get the global context
+</span><span class="nv">$context</span> <span class="o">=</span> <span class="nx">Maera</span><span class="o">-&gt;</span><span class="na">template</span><span class="o">-&gt;</span><span class="na">context</span><span class="p">();</span>
+<span class="c1">// Add our custom context
+// We'll be able to call it in our twigs
+// using {{ my_text }}
+</span><span class="nv">$context</span><span class="p">[</span><span class="s1">'my_text'</span><span class="p">]</span> <span class="o">=</span> <span class="nx">__</span><span class="p">(</span> <span class="s1">'This is some custom context.'</span> <span class="p">);</span>
+<span class="c1">// Render the filename.twig file and include our context
+</span><span class="nx">Maera</span><span class="o">-&gt;</span><span class="na">template</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span> <span class="s1">'filename.twig'</span><span class="p">,</span> <span class="nv">$context</span> <span class="p">);</span>
+
+<span class="cp">?&gt;</span>
+
+</code></pre>
+
+<p>If you want to render a <code class="prettyprint">.twig</code> file and call it from a PHP template, you can use the <code class="prettyprint">render</code> method.</p>
+
+<p>Using <code class="prettyprint">Maera()-&gt;template-&gt;render()</code> you can render your twig files and pass your own context to them. If no filename is defined then the theme will automatically choose the appropriate file from its <a href="#template-hierarchy">template hierarchy</a>.</p>
+
+<p>When you use this method, any caching you&rsquo;ve set on your admin settings will be automatically applied.</p>
+<h2 id='calling-the-theme-header'>Calling the theme header</h2>
+<blockquote>
+<p>Call the header.php file</p>
+</blockquote>
+<pre><code class="highlight php"><span class="cp">&lt;?php</span> <span class="nx">Maera</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">template</span><span class="o">-&gt;</span><span class="na">header</span><span class="p">();</span> <span class="cp">?&gt;</span>
+</code></pre>
+
+<p>In normal WordPress themes you have to call the <a href="http://codex.wordpress.org/Function_Reference/get_header"><code class="prettyprint">get_header()</code></a> function to call your theme&rsquo;s header. This loads the header.php file and its content.
+In Maera, you can do the same using <code class="prettyprint">Maera()-&gt;template-&gt;header();</code>.</p>
+
+<p>Though you could simply use <code class="prettyprint">get_header()</code>, using the above method will ensure your custom templates are ready for the future.</p>
+
+<p>Right now our method simply calls <code class="prettyprint">get_header()</code>, but we don&rsquo;t know what the future holds for us so if there are any improvements or customizations in the future, this will ensure you&rsquo;ll take advantage of them.</p>
+<h2 id='calling-the-theme-footer'>Calling the theme footer</h2>
+<blockquote>
+<p>Call the footer.php file</p>
+</blockquote>
+<pre><code class="highlight php"><span class="cp">&lt;?php</span> <span class="nx">Maera</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">template</span><span class="o">-&gt;</span><span class="na">footer</span><span class="p">();</span> <span class="cp">?&gt;</span>
+</code></pre>
+
+<p>In normal WordPress themes you have to call the <a href="http://codex.wordpress.org/Function_Reference/get_footer"><code class="prettyprint">get_footer()</code></a> function to call your theme&rsquo;s footer. This loads the footer.php file and its content.
+In Maera, you can do the same using <code class="prettyprint">Maera()-&gt;template-&gt;footer();</code>.</p>
+
+<p>Though you could simply use <code class="prettyprint">get_footer()</code>, using the above method will ensure your custom templates are ready for the future.</p>
+
+<p>Right now our method simply calls <code class="prettyprint">get_header()</code>, but we don&rsquo;t know what the future holds for us so if there are any improvements or customizations in the future, this will ensure you&rsquo;ll take advantage of them.</p>
 <h2 id='template-hierarchy'>Template hierarchy</h2>
 <p>You can create additional <code class="prettyprint">.twig</code> files in a child them (or a shell) if you need to override the default template for a post, a page, a taxonomy or whatever you want.</p>
 
@@ -743,105 +809,18 @@ You can keep your <code class="prettyprint">.twig</code> files in the root of yo
 You can see the twig file template parts on the below diagram:
 <img alt="Twig Template Parts" src="https://press.codes/wp-content/uploads/template-structure.png" />
 <a href="https://press.codes/wp-content/uploads/template-structure.png">Get this file for a larger view</a></p>
-<h2 id='post-properties-in-twig-files'>Post properties in twig files</h2>
-<table><thead>
-<tr>
-<th>Property</th>
-<th>Functionality</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code class="prettyprint">{{ post.ID }}</code></td>
-<td>ID of the post</td>
-</tr>
-<tr>
-<td><code class="prettyprint">{{ post.post_author }}</code></td>
-<td>ID of the post author</td>
-</tr>
-<tr>
-<td><code class="prettyprint">{{ post.post_date }}</code></td>
-<td>timestamp in local time</td>
-</tr>
-<tr>
-<td><code class="prettyprint">{{ post.post_date_gmt }}</code></td>
-<td>timestamp in gmt time</td>
-</tr>
-<tr>
-<td><code class="prettyprint">{{ post.post_content }}</code></td>
-<td>Full (unprocessed) body of the post</td>
-</tr>
-<tr>
-<td><code class="prettyprint">{{ post.post_title }}</code></td>
-<td>title of the post</td>
-</tr>
-<tr>
-<td><code class="prettyprint">{{ post.post_excerpt }}</code></td>
-<td>excerpt field of the post, caption if attachment</td>
-</tr>
-<tr>
-<td><code class="prettyprint">{{ post.post_status }}</code></td>
-<td>the post status</td>
-</tr>
-<tr>
-<td><code class="prettyprint">{{ post.comment_status }}</code></td>
-<td>comment status: open, closed</td>
-</tr>
-<tr>
-<td><code class="prettyprint">{{ post.ping_status }}</code></td>
-<td>ping/trackback status</td>
-</tr>
-<tr>
-<td><code class="prettyprint">{{ post.post_password }}</code></td>
-<td>password of the post</td>
-</tr>
-<tr>
-<td><code class="prettyprint">{{ post.post_name }}</code></td>
-<td>post slug, string to use in the URL</td>
-</tr>
-<tr>
-<td><code class="prettyprint">{{ post.post_modified }}</code></td>
-<td>timestamp in local time</td>
-</tr>
-<tr>
-<td><code class="prettyprint">{{ post.post_modified_gmt }}</code></td>
-<td>timestatmp in gmt time</td>
-</tr>
-<tr>
-<td><code class="prettyprint">{{ post.post_parent }}</code></td>
-<td>id of the parent post.</td>
-</tr>
-<tr>
-<td><code class="prettyprint">{{ post.guid }}</code></td>
-<td>global unique id of the post</td>
-</tr>
-<tr>
-<td><code class="prettyprint">{{ post.menu_order }}</code></td>
-<td>menu order</td>
-</tr>
-<tr>
-<td><code class="prettyprint">{{ post.post_type }}</code></td>
-<td>type of post: post, page, attachment, or custom string</td>
-</tr>
-<tr>
-<td><code class="prettyprint">{{ post.post_mime_type }}</code></td>
-<td>mime type for attachment posts</td>
-</tr>
-<tr>
-<td><code class="prettyprint">{{ post.comment_count }}</code></td>
-<td>number of comments</td>
-</tr>
-<tr>
-<td><code class="prettyprint">{{ post.terms }}</code></td>
-<td>taxonomy terms</td>
-</tr>
-<tr>
-<td><code class="prettyprint">{{ post.custom_field }}</code></td>
-<td>custom fields (replace custom_field with your own)</td>
-</tr>
-</tbody></table>
+<h2 id='timber'>Timber</h2>
+<p>We use the <a href="http://wordpress.org/timber-library">Timber</a> plugin to process the twig files, so you can use any of its classes and definitions in your template files.</p>
 
-<p>You can use post properties, fields and content in your <code class="prettyprint">.twig</code> template files however you want.
-On the right you can see what is available and what it does.</p>
+<ul>
+<li><a href="https://github.com/jarednova/timber/wiki/TimberMenu">Menus</a></li>
+<li><a href="https://github.com/jarednova/timber/wiki/TimberPost">Posts</a></li>
+<li><a href="https://github.com/jarednova/timber/wiki/TimberImage">Images</a></li>
+<li><a href="https://github.com/jarednova/timber/wiki/TimberSite">Site</a></li>
+<li><a href="https://github.com/jarednova/timber/wiki/TimberTerm">Terms</a></li>
+<li><a href="https://github.com/jarednova/timber/wiki/TimberUser">Users</a></li>
+<li><a href="https://github.com/jarednova/timber/wiki/Filters">Filters</a></li>
+</ul>
 
       </div>
       <div class="dark-box">
