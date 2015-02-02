@@ -607,7 +607,7 @@ You can keep your <code class="prettyprint">.twig</code> files in the root of yo
 <blockquote>
 <p>Rendering a twig file from a PHP template</p>
 </blockquote>
-<pre><code class="highlight php"><span class="cp">&lt;?php</span> <span class="nx">Maera</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">template</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span> <span class="s1">'filename.twig'</span> <span class="p">);</span> <span class="cp">?&gt;</span>
+<pre><code class="highlight php"><span class="cp">&lt;?php</span> <span class="nx">Maera</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">views</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span> <span class="s1">'filename.twig'</span> <span class="p">);</span> <span class="cp">?&gt;</span>
 </code></pre>
 
 <blockquote>
@@ -616,13 +616,13 @@ You can keep your <code class="prettyprint">.twig</code> files in the root of yo
 <pre><code class="highlight php"><span class="cp">&lt;?php</span>
 
 <span class="c1">// Get the global context
-</span><span class="nv">$context</span> <span class="o">=</span> <span class="nx">Maera</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">template</span><span class="o">-&gt;</span><span class="na">context</span><span class="p">();</span>
+</span><span class="nv">$context</span> <span class="o">=</span> <span class="nx">Maera</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">views</span><span class="o">-&gt;</span><span class="na">context</span><span class="p">();</span>
 <span class="c1">// Add our custom context
 // We'll be able to call it in our twigs
 // using {{ my_text }}
 </span><span class="nv">$context</span><span class="p">[</span><span class="s1">'my_text'</span><span class="p">]</span> <span class="o">=</span> <span class="nx">__</span><span class="p">(</span> <span class="s1">'This is some custom context.'</span> <span class="p">);</span>
 <span class="c1">// Render the filename.twig file and include our context
-</span><span class="nx">Maera</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">template</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span> <span class="s1">'filename.twig'</span><span class="p">,</span> <span class="nv">$context</span> <span class="p">);</span>
+</span><span class="nx">Maera</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">views</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span> <span class="s1">'filename.twig'</span><span class="p">,</span> <span class="nv">$context</span> <span class="p">);</span>
 
 <span class="cp">?&gt;</span>
 
@@ -630,18 +630,18 @@ You can keep your <code class="prettyprint">.twig</code> files in the root of yo
 
 <p>If you want to render a <code class="prettyprint">.twig</code> file and call it from a PHP template, you can use the <code class="prettyprint">render</code> method.</p>
 
-<p>Using <code class="prettyprint">Maera()-&gt;template-&gt;render()</code> you can render your twig files and pass your own context to them. If no filename is defined then the theme will automatically choose the appropriate file from its <a href="#template-hierarchy">template hierarchy</a>.</p>
+<p>Using <code class="prettyprint">Maera()-&gt;views-&gt;render()</code> you can render your twig files and pass your own context to them. If no filename is defined then the theme will automatically choose the appropriate file from its <a href="#template-hierarchy">template hierarchy</a>.</p>
 
 <p>When you use this method, any caching you&rsquo;ve set on your admin settings will be automatically applied.</p>
 <h2 id='calling-the-theme-header'>Calling the theme header</h2>
 <blockquote>
 <p>Call the header.php file</p>
 </blockquote>
-<pre><code class="highlight php"><span class="cp">&lt;?php</span> <span class="nx">Maera</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">template</span><span class="o">-&gt;</span><span class="na">header</span><span class="p">();</span> <span class="cp">?&gt;</span>
+<pre><code class="highlight php"><span class="cp">&lt;?php</span> <span class="nx">Maera</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">views</span><span class="o">-&gt;</span><span class="na">header</span><span class="p">();</span> <span class="cp">?&gt;</span>
 </code></pre>
 
 <p>In normal WordPress themes you have to call the <a href="http://codex.wordpress.org/Function_Reference/get_header"><code class="prettyprint">get_header()</code></a> function to call your theme&rsquo;s header. This loads the header.php file and its content.
-In Maera, you can do the same using <code class="prettyprint">Maera()-&gt;template-&gt;header();</code>.</p>
+In Maera, you can do the same using <code class="prettyprint">Maera()-&gt;views-&gt;header();</code>.</p>
 
 <p>Though you could simply use <code class="prettyprint">get_header()</code>, using the above method will ensure your custom templates are ready for the future.</p>
 
@@ -650,11 +650,11 @@ In Maera, you can do the same using <code class="prettyprint">Maera()-&gt;templa
 <blockquote>
 <p>Call the footer.php file</p>
 </blockquote>
-<pre><code class="highlight php"><span class="cp">&lt;?php</span> <span class="nx">Maera</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">template</span><span class="o">-&gt;</span><span class="na">footer</span><span class="p">();</span> <span class="cp">?&gt;</span>
+<pre><code class="highlight php"><span class="cp">&lt;?php</span> <span class="nx">Maera</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">views</span><span class="o">-&gt;</span><span class="na">footer</span><span class="p">();</span> <span class="cp">?&gt;</span>
 </code></pre>
 
 <p>In normal WordPress themes you have to call the <a href="http://codex.wordpress.org/Function_Reference/get_footer"><code class="prettyprint">get_footer()</code></a> function to call your theme&rsquo;s footer. This loads the footer.php file and its content.
-In Maera, you can do the same using <code class="prettyprint">Maera()-&gt;template-&gt;footer();</code>.</p>
+In Maera, you can do the same using <code class="prettyprint">Maera()-&gt;views-&gt;footer();</code>.</p>
 
 <p>Though you could simply use <code class="prettyprint">get_footer()</code>, using the above method will ensure your custom templates are ready for the future.</p>
 
