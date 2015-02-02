@@ -22,7 +22,7 @@ You can keep your `.twig` files in the root of your child theme, or a `/views` f
 > Rendering a twig file from a PHP template
 
 ```php
-<?php Maera()->template->render( 'filename.twig' ); ?>
+<?php Maera()->views->render( 'filename.twig' ); ?>
 ```
 
 > adding custom context:
@@ -31,13 +31,13 @@ You can keep your `.twig` files in the root of your child theme, or a `/views` f
 <?php
 
 // Get the global context
-$context = Maera()->template->context();
+$context = Maera()->views->context();
 // Add our custom context
 // We'll be able to call it in our twigs
 // using {{ my_text }}
 $context['my_text'] = __( 'This is some custom context.' );
 // Render the filename.twig file and include our context
-Maera()->template->render( 'filename.twig', $context );
+Maera()->views->render( 'filename.twig', $context );
 
 ?>
 
@@ -45,7 +45,7 @@ Maera()->template->render( 'filename.twig', $context );
 
 If you want to render a `.twig` file and call it from a PHP template, you can use the `render` method.
 
-Using `Maera()->template->render()` you can render your twig files and pass your own context to them. If no filename is defined then the theme will automatically choose the appropriate file from its [template hierarchy](#template-hierarchy).
+Using `Maera()->views->render()` you can render your twig files and pass your own context to them. If no filename is defined then the theme will automatically choose the appropriate file from its [template hierarchy](#template-hierarchy).
 
 When you use this method, any caching you've set on your admin settings will be automatically applied.
 
@@ -54,11 +54,11 @@ When you use this method, any caching you've set on your admin settings will be 
 > Call the header.php file
 
 ```php
-<?php Maera()->template->header(); ?>
+<?php Maera()->views->header(); ?>
 ```
 
 In normal WordPress themes you have to call the [`get_header()`](http://codex.wordpress.org/Function_Reference/get_header) function to call your theme's header. This loads the header.php file and its content.
-In Maera, you can do the same using `Maera()->template->header();`.
+In Maera, you can do the same using `Maera()->views->header();`.
 
 Though you could simply use `get_header()`, using the above method will ensure your custom templates are ready for the future.
 
@@ -69,11 +69,11 @@ Right now our method simply calls `get_header()`, but we don't know what the fut
 > Call the footer.php file
 
 ```php
-<?php Maera()->template->footer(); ?>
+<?php Maera()->views->footer(); ?>
 ```
 
 In normal WordPress themes you have to call the [`get_footer()`](http://codex.wordpress.org/Function_Reference/get_footer) function to call your theme's footer. This loads the footer.php file and its content.
-In Maera, you can do the same using `Maera()->template->footer();`.
+In Maera, you can do the same using `Maera()->views->footer();`.
 
 Though you could simply use `get_footer()`, using the above method will ensure your custom templates are ready for the future.
 
