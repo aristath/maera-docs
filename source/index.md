@@ -31,7 +31,7 @@ search: true
 >
 > [WooCommerce Integration - Coming Soon](https://press.codes/downloads/maera-woocommerce/)
 
-**Maera** is a developer-friendly WordPress theme that allows you to quickly prototype sites and extend it with your own custom plugins.
+**Maera** is a developer-friendly WordPress plugin that allows you to quickly prototype sites and extend it with your own custom plugins.
 
 **It's a kick-ass open-minded theming framework.**
 
