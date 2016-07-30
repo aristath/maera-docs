@@ -27,9 +27,9 @@ search: true
 >
 > [Foundation Shell - Coming Soon](https://wpsatchel.com)
 >
-> [Easy Digital Downloads Integration](Included in Core!)
+> [Easy Digital Downloads Integration - Included in core](https://wpsatchel.com)
 >
-> [WooCommerce Integration - Coming Soon](Included in Core!)
+> [WooCommerce Integration - Include in core](https://wpsatchel.com)
 
 **Maera** is a developer-friendly WordPress plugin that allows you to quickly prototype sites and extend it with your own custom plugins.
 
